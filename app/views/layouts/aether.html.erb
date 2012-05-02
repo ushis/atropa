@@ -1,0 +1,15 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8"/>
+    <title><%= @title %> / atropa</title>
+
+    <%= stylesheet_link_tag 'admin', :media => :all %>
+    <%= csrf_meta_tags %>
+  </head>
+  <body>
+    <div id="aether">
+      <%= yield %>
+    </div>
+  </body>
+</html>

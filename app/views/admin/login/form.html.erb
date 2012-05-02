@@ -1,0 +1,11 @@
+<%= form_tag do %>
+  <p>
+    <%= text_field_tag :username, @username, :placeholder => 'username' %>
+  </p>
+  <p>
+    <%= password_field_tag :password, nil, :placeholder => 'password' %>
+  </p>
+  <p>
+    <%= submit_tag 'Log In' %>
+  </p>
+<% end %>
