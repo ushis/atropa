@@ -1,11 +1,14 @@
-<%= form_tag do %>
+<%= form_tag admin_login_url, :id => 'login-form' do %>
   <p>
-    <%= text_field_tag :username, @username, :placeholder => 'username' %>
+    <%= text_field_tag :username, @username, :placeholder => 'username', :required => true %>
   </p>
   <p>
-    <%= password_field_tag :password, nil, :placeholder => 'password' %>
+    <%= password_field_tag :password, nil, :placeholder => 'password', :required => true %>
   </p>
   <p>
     <%= submit_tag 'Log In' %>
   </p>
 <% end %>
+<script>
+  $('#login-form').magicLogin();
+</script>
