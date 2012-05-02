@@ -153,3 +153,9 @@ table {
   font-size: 13px;
   line-height: 30px;
 }
+
+/* Wrapper */
+#wrapper {
+  width: 800px;
+  margin: 36px auto 0 auto;
+}

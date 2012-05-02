@@ -7,7 +7,7 @@ class Tag < ActiveRecord::Base
 
   before_create :add_slug
 
-  def from_s(str, delimiter=/,\s*/)
+  def self.from_s(str, delimiter=/,\s*/)
     tags = []
 
     str.split(delimiter).each do |tag|
