@@ -12,7 +12,7 @@ class Tag < ActiveRecord::Base
 
     str.split(delimiter).each do |tag|
       tag.strip!
-      tags << tag unless tag.empty? && tags.include?(tag)
+      tags << tag unless tag.empty? || tags.include?(tag)
     end
 
     return [] if tags.empty?
@@ -22,11 +22,7 @@ class Tag < ActiveRecord::Base
       tags.delete tag.tag
     end
 
-    tag.each do |tag|
-      ret << Tag.new(:tag => tag)
-    end
-
-    ret
+    ret + tags.collect {|tag| self.new(:tag => tag)}
   end
 
   def to_s
