@@ -1,7 +1,34 @@
 <ul>
   <% @videos.each do |video| %>
     <li>
-      <%= video.title %>
+      <div class="preview">
+        <%= link_to image_tag(video.preview, :width => 140), edit_admin_video_url(video) %>
+      </div>
+      <div>
+        <h2>
+          <%= video.title %>
+        </h2>
+        <ul>
+          <li>
+            <%= time_ago_in_words video.created_at %> by <%= video.user.username %>
+          </li>
+          <li>
+            <%= video.width %>×<%= video.height %>
+          </li>
+          <li>
+            <%= video_link video, video.provider %>
+          </li>
+        </ul>
+        <ul>
+          <% video.tags.each do |tag| %>
+            <li>
+              <%= tag.tag %>
+            </li>
+          <% end %>
+        </ul>
+      </div>
     </li>
   <% end %>
 </ul>
+
+<%= pagination_links @pagination %>
