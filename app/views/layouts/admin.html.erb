@@ -17,7 +17,7 @@
             <%= link_to 'home', admin_path, :class => 'home' %>
           </li>
           <li>
-            <%= form_tag admin_videos_path do %>
+            <%= form_tag admin_videos_path, :id => 'new-video-link'  do %>
               <%= text_field_tag :url, nil, :placeholder => 'Submit a new video link' %>
             <% end %>
           </li>
@@ -44,6 +44,7 @@
       </nav>
     </header>
     <div id="wrapper">
+      <%= flash_all %>
       <div id="content">
         <%= yield %>
       </div>

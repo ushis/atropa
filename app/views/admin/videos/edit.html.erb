@@ -1,0 +1,22 @@
+<%= form_tag admin_video_path(@video), :method => :put do |f| %>
+  <h1>
+    <%= @video.title %>
+  </h1>
+  <ul>
+    <li>
+      <%= time_ago_in_words @video.created_at %> ago by <%= @video.user.username %>
+    </li>
+    <li>
+      <%= video_link @video %>
+    </li>
+    <li>
+      <%= link_to '↗', '#' %>
+    </li>
+  </ul>
+  <div class="iframe">
+    <%= video_iframe @video, 600 %>
+  </div>
+  <p>
+    <%= text_field_tag :tags, @video.tags.join(', '), :placeholder => 'Add some tags here' %>
+  </p>
+<% end %>

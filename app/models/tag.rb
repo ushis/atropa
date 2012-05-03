@@ -16,12 +16,9 @@ class Tag < ActiveRecord::Base
     end
 
     return [] if tags.empty?
+
     ret = self.where :tag => tags
-
-    ret.each do |tag|
-      tags.delete tag.tag
-    end
-
+    ret.each {|tag| tags.delete tag.tag}
     ret + tags.collect {|tag| self.new(:tag => tag)}
   end
 

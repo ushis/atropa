@@ -1,5 +1,5 @@
 class Video < ActiveRecord::Base
-  attr_accessible :title, :slug, :width, :height, :preview, :provider
+  attr_accessible :vid, :title, :slug, :width, :height, :preview, :provider
 
   validates :title, :presence => true
   validates :vid, :presence => true
@@ -21,7 +21,7 @@ class Video < ActiveRecord::Base
       info[:current] = page
     end
 
-    [self.includes(:tags).order('videos.created_at DESC').limit(per_page)
+    [self.includes(:tags, :user).order('videos.created_at DESC').limit(per_page)
      .offset((info[:current] -1) * per_page).all, info]
   end
 

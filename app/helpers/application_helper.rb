@@ -2,6 +2,12 @@ require 'digest/md5'
 
 module ApplicationHelper
 
+  def flash_all
+    ret = ''
+    flash.each {|key, msg| ret += content_tag 'div', msg, :class => 'flash ' + key.to_s}
+    ret.html_safe
+  end
+
   def gravatar_tag(email, size = 50)
     size = size.to_s
     uri = 'https://secure.gravatar.com/avatar/'

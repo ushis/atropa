@@ -65,6 +65,9 @@ a:hover, input[type=submit].button:hover {
   color: #999;
 }
 
+iframe {
+  background-color: #111;
+}
 
 /* Header */
 #header {
