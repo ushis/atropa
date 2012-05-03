@@ -19,6 +19,19 @@ class Admin::VideosController < AdminController
   end
 
   def destroy
+    begin
+      video = Video.find params[:id]
+    rescue
+      flash[:alert] = 'Video does not exist.'
+      redirect_to request.referer and return
+    end
 
+    if video.delete
+      flash[:notice] = 'Deleted video.'
+    else
+      flash[:alert] = 'Could not delete video.'
+    end
+
+    redirect_to request.referer
   end
 end

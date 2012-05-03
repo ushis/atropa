@@ -52,6 +52,19 @@ table {
 }
 
 /* Elements */
+a, input[type=submit].button {
+  margin: 0;
+  padding: 0;
+  color: #111;
+  background-color: transparent;
+  border: 0 none transparent;
+  cursor: pointer;
+}
+
+a:hover, input[type=submit].button:hover {
+  color: #999;
+}
+
 
 /* Header */
 #header {
@@ -124,7 +137,7 @@ table {
   right: 0;
   padding: 6px 0;
   background-color: #444;
-  border-radius: 0 0 3px 3px;
+  border-radius: 0 0 2px 2px;
 }
 
 #header nav ul li:hover ul {
@@ -143,7 +156,7 @@ table {
 }
 
 #header nav ul li ul li.avatar img {
-  border-radius: 3px;
+  border-radius: 2px;
 }
 
 #header nav ul li ul li a,
@@ -157,5 +170,82 @@ table {
 /* Wrapper */
 #wrapper {
   width: 800px;
-  margin: 36px auto 0 auto;
+  margin: 46px auto 0 auto;
+}
+
+#content {
+  float: left;
+  width: 100%;
+  margin: 20px 0 50px 0;
+}
+
+/* Video list */
+ul.video-list > li {
+  clear: both;
+  height: 78px;
+  margin-bottom: 30px;
+  font-size: 12px;
+  line-height: 22px;
+  background-color: #f5f5f5;
+  border: 1px solid #d0d0d0;
+  border-radius: 2px;
+}
+
+ul.video-list li:hover {
+  background-color: #fff;
+  border-color: #c0c0c0;
+}
+
+ul.video-list li div.preview {
+  float: left;
+  width: 140px;
+  height: 78px;
+  overflow: hidden;
+  background-color: #000;
+  border-radius: 2px 0 0 2px;
+}
+
+ul.video-list li div.description {
+  margin-left: 160px;
+  padding: 2px 0;
+}
+
+ul.video-list li h2 {
+  font-size: 16px;
+  line-height: 30px;
+}
+
+ul.video-list li h2 input[type=submit] {
+  float: right;
+  font-size: 14px;
+  line-height: 28px;
+  margin-right: 12px;
+}
+
+ul.video-list li ul li {
+  display: inline;
+}
+
+ul.video-list li ul.details li:nth-child(n+2):before {
+  content: '·';
+  padding: 0 4px;
+}
+
+ul.video-list li ul.tags li:nth-child(n+2):before {
+  content: '/';
+  padding: 0 4px;
+}
+
+/* Pagination */
+ul.pagination li {
+  float: left;
+  font-size: .8em;
+}
+
+ul.pagination li > * {
+  padding: 0 6px;
+}
+
+ul.pagination li span {
+  color: #999;
 }

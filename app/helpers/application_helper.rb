@@ -10,9 +10,6 @@ module ApplicationHelper
     image_tag uri, :alt => 'Gravatar', :width => size, :height => size
   end
 
-  def video_link(video, txt = nil)
-
-
   def pagination_link(txt, url, page)
     url[:page] = page
     content_tag 'li', link_to(txt, url)
@@ -30,6 +27,6 @@ module ApplicationHelper
     end
 
     links += pagination_link('>', info[:url], info[:current] + 1) if info[:current] < info[:total]
-    content_tag 'ul', links.html_safe
+    content_tag 'ul', links.html_safe, :class => 'pagination'
   end
 end

@@ -1,16 +1,17 @@
-<ul>
+<ul class="video-list">
   <% @videos.each do |video| %>
     <li>
       <div class="preview">
-        <%= link_to image_tag(video.preview, :width => 140), edit_admin_video_url(video) %>
+        <%= link_to image_tag(video.preview, :width => 140), edit_admin_video_path(video) %>
       </div>
-      <div>
+      <div class="description">
         <h2>
-          <%= video.title %>
+          <%= button_to '×', admin_video_path(video), :method => :delete, :class => 'button del' %>
+          <%= link_to video.title.truncate(70), edit_admin_video_path(video) %>
         </h2>
-        <ul>
+        <ul class="details">
           <li>
-            <%= time_ago_in_words video.created_at %> by <%= video.user.username %>
+            <%= time_ago_in_words video.created_at %> ago by <%= video.user.username %>
           </li>
           <li>
             <%= video.width %>×<%= video.height %>
@@ -19,7 +20,7 @@
             <%= video_link video, video.provider %>
           </li>
         </ul>
-        <ul>
+        <ul class="tags">
           <% video.tags.each do |tag| %>
             <li>
               <%= tag.tag %>
