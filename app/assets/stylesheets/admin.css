@@ -66,7 +66,40 @@ a:hover, input[type=submit].button:hover {
 }
 
 iframe {
+  margin: 12px 0;
   background-color: #111;
+}
+
+h1 {
+  font-size: 20px;
+}
+
+ul.details li {
+  display: inline;
+  font-size: 12px;
+}
+
+ul.details li:nth-child(n+2):before {
+  content: '·';
+  padding: 0 4px;
+}
+
+input[type=text] {
+  width: 100%;
+  margin: 0;
+  padding: 6px;
+  font-size: 14px;
+  color: #333;
+  background-color: #f9f9f9;
+  border: 1px solid #c0c0c0;
+  outline: 0 none transparent;
+  box-sizing: border-box;
+}
+
+input[type=text]:hover, input[type=text]:focus {
+  color: #111;
+  background-color: #fff;
+  border-color: #aaa;
 }
 
 /* Header */
@@ -154,6 +187,7 @@ iframe {
   width: 50px;
   height: 50px;
   float: left;
+
   margin: 0;
   padding: 5px 0 5px 15px;
 }
@@ -174,6 +208,11 @@ iframe {
 #wrapper {
   width: 800px;
   margin: 46px auto 0 auto;
+}
+
+
+body.form > #wrapper {
+  width: 600px;
 }
 
 #content {
@@ -225,15 +264,6 @@ ul.video-list li h2 input[type=submit] {
   margin-right: 12px;
 }
 
-ul.video-list li ul li {
-  display: inline;
-}
-
-ul.video-list li ul.details li:nth-child(n+2):before {
-  content: '·';
-  padding: 0 4px;
-}
-
 ul.video-list li ul.tags li:nth-child(n+2):before {
   content: '/';
   padding: 0 4px;
@@ -251,4 +281,27 @@ ul.pagination li > * {
 
 ul.pagination li span {
   color: #999;
+}
+
+/* Autocomplete */
+ul.ui-autocomplete {
+  position: absolute;
+  font-size: 13px;
+  max-height: 200px;
+  background-color: #f9f9f9;
+  border: 1px solid #aaa;
+  border-top: 0 none transparent;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+ul.ui-autocomplete li a {
+  display: block;
+  padding: 2px 6px;
+}
+
+ul.ui-autocomplete li a.ui-state-hover,
+ul.ui-autocomplete li a.ui-state-focus {
+  color: #111;
+  background-color: #d0d0d0;
 }

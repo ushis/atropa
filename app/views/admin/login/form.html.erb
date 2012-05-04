@@ -1,9 +1,9 @@
-<%= form_tag admin_login_path, :id => 'login-form' do %>
+<%= form_tag admin_login_path, id: 'login-form' do %>
   <p>
-    <%= text_field_tag :username, @username, :placeholder => 'username', :required => true %>
+    <%= text_field_tag :username, @username, placeholder: 'username', required: true %>
   </p>
   <p>
-    <%= password_field_tag :password, nil, :placeholder => 'password', :required => true %>
+    <%= password_field_tag :password, nil, placeholder: 'password', required: true %>
   </p>
   <p>
     <%= submit_tag 'Log In' %>

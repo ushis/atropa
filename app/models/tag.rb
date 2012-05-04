@@ -1,13 +1,13 @@
 class Tag < ActiveRecord::Base
   attr_accessible :tag, :slug
 
-  validates :tag, :presence => true
+  validates :tag, presence: true
 
   has_and_belongs_to_many :videos
 
   before_create :add_slug
 
-  def self.from_s(str, delimiter=/,\s*/)
+  def self.from_s(str, delimiter = /,\s*/)
     tags = []
 
     str.split(delimiter).each do |tag|
@@ -17,9 +17,13 @@ class Tag < ActiveRecord::Base
 
     return [] if tags.empty?
 
-    ret = self.where :tag => tags
-    ret.each {|tag| tags.delete tag.tag}
-    ret + tags.collect {|tag| self.new(:tag => tag)}
+    ret = self.where tag: tags
+    ret.each { |tag| tags.delete tag.tag }
+    ret + tags.collect { |tag| self.new(tag: tag) }
+  end
+
+  def self.all_as_a
+    self.order(:tag).all.collect { |tag| tag.tag }
   end
 
   def to_s

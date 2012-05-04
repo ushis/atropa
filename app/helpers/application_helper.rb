@@ -13,7 +13,7 @@ module ApplicationHelper
     uri = 'https://secure.gravatar.com/avatar/'
     uri += Digest::MD5.hexdigest email.strip.downcase
     uri += '?d=mm&s=' + size
-    image_tag uri, :alt => 'Gravatar', :width => size, :height => size
+    image_tag uri, alt: 'Gravatar', width: size, height: size
   end
 
   def pagination_link(txt, url, page)
@@ -33,6 +33,6 @@ module ApplicationHelper
     end
 
     links += pagination_link('>', info[:url], info[:current] + 1) if info[:current] < info[:total]
-    content_tag 'ul', links.html_safe, :class => 'pagination'
+    content_tag 'ul', links.html_safe, class: 'pagination'
   end
 end

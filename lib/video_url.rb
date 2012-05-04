@@ -28,11 +28,9 @@ module VideoUrl
   end
 
   def video_info
-    begin
-      ActiveSupport::JSON.decode open(@api).read()
-    rescue
-      raise 'Could not retrieve video info'
-    end
+    ActiveSupport::JSON.decode open(@api).read()
+  rescue
+    raise 'Could not retrieve video info'
   end
 end
 
@@ -47,18 +45,16 @@ class VideoUrl::VimeoUrl
   end
 
   def info
-    begin
-      data = self.video_info[0]
+    data = self.video_info[0]
 
-      {:vid      => data['id'],
-       :title    => data['title'],
-       :width    => data['width'],
-       :height   => data['height'],
-       :preview  => data['thumbnail_large'],
-       :provider => 'vimeo'}
-    rescue KeyError
-      raise 'Vimeo responded with invalid data'
-    end
+    {vid:      data['id'],
+     title:    data['title'],
+     width:    data['width'],
+     height:   data['height'],
+     preview:  data['thumbnail_large'],
+     provider: 'vimeo'}
+  rescue KeyError
+    raise 'Vimeo responded with invalid data'
   end
 end
 
@@ -73,17 +69,15 @@ class VideoUrl::YoutubeUrl
   end
 
   def info
-    begin
-      data = self.video_info['entry']
+    data = self.video_info['entry']
 
-      {:vid      => data['media$group']['yt$videoid']['$t'],
-       :title    => data['title']['$t'],
-       :width    => data['media$group']['media$thumbnail'][2]['width'],
-       :height   => data['media$group']['media$thumbnail'][2]['height'],
-       :preview  => data['media$group']['media$thumbnail'][2]['url'],
-       :provider => 'youtube'}
-    rescue KeyError
-      raise 'Youtube responded with invalid data'
-    end
+    {vid:      data['media$group']['yt$videoid']['$t'],
+     title:    data['title']['$t'],
+     width:    data['media$group']['media$thumbnail'][2]['width'],
+     height:   data['media$group']['media$thumbnail'][2]['height'],
+     preview:  data['media$group']['media$thumbnail'][2]['url'],
+     provider: 'youtube'}
+  rescue KeyError
+    raise 'Youtube responded with invalid data'
   end
 end

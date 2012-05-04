@@ -2,11 +2,11 @@
   <% @videos.each do |video| %>
     <li>
       <div class="preview">
-        <%= link_to image_tag(video.preview, :width => 140), edit_admin_video_path(video) %>
+        <%= link_to image_tag(video.preview, width: 140), edit_admin_video_path(video) %>
       </div>
       <div class="description">
         <h2>
-          <%= button_to '×', admin_video_path(video), :method => :delete, :class => 'button del' %>
+          <%= button_to '×', admin_video_path(video), method: :delete, class: 'button del' %>
           <%= link_to video.title.truncate(70), edit_admin_video_path(video) %>
         </h2>
         <ul class="details">
@@ -20,7 +20,7 @@
             <%= video_link video, video.provider %>
           </li>
         </ul>
-        <ul class="tags">
+        <ul class="details tags">
           <% video.tags.each do |tag| %>
             <li>
               <%= tag.tag %>

@@ -5,11 +5,11 @@ class User < ActiveRecord::Base
 
   has_secure_password
 
-  validates :password, :presence => true, :on => :create
+  validates :password, presence: true, on: :create
 
   has_many :videos
 
-  def refresh_login_hash
+  def refresh_login_hash!
     self.login_hash = Digest::SHA1.hexdigest Time.now.to_s + self.username
     self.save
   end

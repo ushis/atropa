@@ -4,21 +4,22 @@
     <meta charset="utf-8"/>
     <title><%= @title %> / atropa</title>
 
-    <%= stylesheet_link_tag 'admin', :media => :all %>
+    <%= stylesheet_link_tag 'admin', media: :all %>
     <%= javascript_include_tag 'https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js' %>
+    <%= javascript_include_tag 'https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.min.js' %>
     <%= javascript_include_tag 'admin' %>
     <%= csrf_meta_tags %>
   </head>
-  <body>
+  <body class="<%= @bodyclass %>">
     <header id="header">
       <nav>
         <ul>
           <li>
-            <%= link_to 'home', admin_path, :class => 'home' %>
+            <%= link_to 'home', admin_path, class: 'home' %>
           </li>
           <li>
-            <%= form_tag admin_videos_path, :id => 'new-video-link'  do %>
-              <%= text_field_tag :url, nil, :placeholder => 'Submit a new video link' %>
+            <%= form_tag admin_videos_path, id: 'new-video-link'  do %>
+              <%= text_field_tag :url, nil, placeholder: 'Submit a new video link' %>
             <% end %>
           </li>
           <li>
@@ -33,7 +34,7 @@
                 <%= link_to 'Settings', '#' %>
               </li>
               <li>
-                <%= button_to 'Log Out', admin_login_path, :method => :delete %>
+                <%= button_to 'Log Out', admin_login_path, method: :delete %>
               </li>
             </ul>
           </li>

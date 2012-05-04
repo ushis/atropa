@@ -31,6 +31,6 @@ module VideoHelper
       width = (height * video.width) / video.height
     end
 
-    content_tag 'iframe', nil, :src => src, :frameborder => 0, :width => width, :height => height
+    content_tag 'iframe', nil, src: src, frameborder: 0, width: width, height: height
   end
 end
