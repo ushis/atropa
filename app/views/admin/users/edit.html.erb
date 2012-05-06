@@ -1,0 +1,24 @@
+<%= form_for [:admin, @user] do |f| %>
+  <div class="avatar">
+    <%= gravatar_tag @user.email, 120 %>
+  </div>
+  <div class="fields">
+    <h1>
+      <%= @user.username %>
+    </h1>
+    <p>
+      <%= f.text_field :email, placeholder: 'Insert your email' %>
+    <p>
+      <%= f.password_field :password, placeholder: 'Insert a new password' %>
+    </p>
+    <p>
+      <%= f.password_field :password_confirmation, placeholder: 'Repeat the new password' %>
+    </p>
+    <p>
+      <%= f.password_field :password_old, placeholder: 'Insert your old password' %>
+    </p>
+    <p>
+      <%= f.submit 'Save' %>
+    </p>
+  </div>
+<% end %>

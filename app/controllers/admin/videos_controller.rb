@@ -32,7 +32,23 @@ class Admin::VideosController < AdminController
   end
 
   def update
+    @video = Video.find params[:id]
+  rescue
+     flash[:alert] = 'Could not find video'
+     redirect_to(request.referer) and return
+  else
+    @video.tags = Tag.from_s(params[:tags]) if params[:tags]
 
+    if @video.save
+      flash.now[:notice] = 'Saved changes.'
+    else
+      flash.now[:alert] = 'Could not save changes.'
+    end
+
+    @title = @video.title
+    @bodyclass = 'form'
+    @tags = Tag.all_as_a
+    render(:edit)
   end
 
   def destroy

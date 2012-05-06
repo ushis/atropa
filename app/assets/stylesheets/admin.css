@@ -84,7 +84,7 @@ ul.details li:nth-child(n+2):before {
   padding: 0 4px;
 }
 
-input[type=text] {
+input[type=text], input[type=password] {
   width: 100%;
   margin: 0;
   padding: 6px;
@@ -96,10 +96,24 @@ input[type=text] {
   box-sizing: border-box;
 }
 
-input[type=text]:hover, input[type=text]:focus {
+input[type=text]:hover, input[type=text]:focus,
+input[type=password]:hover, input[type=password]:focus {
   color: #111;
   background-color: #fff;
   border-color: #aaa;
+}
+
+form div.avatar {
+  float: left;
+  margin: 0 20px 20px 0;
+}
+
+form div.fields {
+  margin-left: 140px;
+}
+
+form div.fields p {
+  margin: 10px 0;
 }
 
 /* Header */
@@ -207,7 +221,7 @@ input[type=text]:hover, input[type=text]:focus {
 /* Wrapper */
 #wrapper {
   width: 800px;
-  margin: 46px auto 0 auto;
+  margin: 56px auto 0 auto;
 }
 
 
@@ -269,6 +283,16 @@ ul.video-list li ul.tags li:nth-child(n+2):before {
   padding: 0 4px;
 }
 
+/* Flash */
+div.flash {
+  padding: 4px 10px;
+  font-size: 12px;
+  font-weight: bold;
+  color: #f0f0f0;
+  background-color: #444;
+  border-radius: 2px;
+}
+
 /* Pagination */
 ul.pagination li {
   float: left;
@@ -300,6 +324,7 @@ ul.ui-autocomplete li a {
   padding: 2px 6px;
 }
 
+ul.ui-autocomplete li a:hover,
 ul.ui-autocomplete li a.ui-state-hover,
 ul.ui-autocomplete li a.ui-state-focus {
   color: #111;

@@ -18,9 +18,9 @@ class Admin::LoginController < AdminController
     user = User.find_by_username @username
 
     if user.nil? || ! user.authenticate(params[:password])
-      flash[:alert] = 'Wrong username/password combo.'
+      flash.now[:alert] = 'Wrong username/password combo.'
     elsif ! user.refresh_login_hash!
-      flash[:alert] = 'Something went wrong. Let\'s try it again.'
+      flash.now[:alert] = 'Something went wrong. Let\'s try it again.'
     else
       session[:login_hash] = user.login_hash
       redirect_to admin_url and return

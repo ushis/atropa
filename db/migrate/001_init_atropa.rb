@@ -2,36 +2,36 @@ class InitAtropa < ActiveRecord::Migration
 
   def up
     create_table :videos do |t|
-      t.integer :user_id
-      t.string :vid
-      t.string :title
-      t.string :slug
-      t.integer :width
-      t.integer :height
-      t.string :preview
-      t.string :provider
+      t.integer :user_id,  null: false
+      t.string  :vid,      null: false
+      t.string  :title,    null: false
+      t.string  :slug,     null: false
+      t.integer :width,    null: false
+      t.integer :height,   null: false
+      t.string  :preview,  null: false
+      t.string  :provider, null: false
       t.timestamps
     end
 
     create_table :tags do |t|
-      t.string :tag
-      t.string :slug
+      t.string :tag,  null: false
+      t.string :slug, null: false
     end
 
     create_table :tags_videos, :id => false do |t|
-      t.integer :tag_id
-      t.integer :video_id
+      t.integer :tag_id,   null: false
+      t.integer :video_id, null: false
     end
 
     create_table :users do |t|
-      t.string :username
-      t.string :password_digest
-      t.string :email
-      t.string :login_hash
-      t.timestamp :created_at
+      t.string :username,        null: false
+      t.string :password_digest, null: false
+      t.string :email,           null: false
+      t.string :login_hash,      null: true
+      t.timestamp :created_at,   null: false
     end
 
-    User.new(:username => 'ushi', :password => 'ushi', :email => 'ushi@example.com').save
+    User.new(username: 'ushi', password: 'ushi', email: 'ushi@example.com').save
   end
 
   def down

@@ -5,6 +5,7 @@ Atropa::Application.routes.draw do
 
   namespace :admin do
     resources :videos
+    resources :users
     get    'login' => 'login#form'
     post   'login' => 'login#login'
     delete 'login' => 'login#logout'

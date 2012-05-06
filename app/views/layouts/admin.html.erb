@@ -31,7 +31,7 @@
                 <%= gravatar_tag current_user.email %>
               </li>
               <li>
-                <%= link_to 'Settings', '#' %>
+                <%= link_to 'Settings', edit_admin_user_path(current_user) %>
               </li>
               <li>
                 <%= button_to 'Log Out', admin_login_path, method: :delete %>
