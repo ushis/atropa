@@ -29,10 +29,10 @@ module ApplicationHelper
     links = info[:current] > 1 ? pagination_link('<', info[:url], info[:current] - 1) : ''
 
     (1..info[:total]).each do |i|
-      links += info[:current] != i ? pagination_link(i, info[:url], i) : pagination_current(i)
+      links << (info[:current] != i ? pagination_link(i, info[:url], i) : pagination_current(i))
     end
 
-    links += pagination_link('>', info[:url], info[:current] + 1) if info[:current] < info[:total]
+    links << pagination_link('>', info[:url], info[:current] + 1) if info[:current] < info[:total]
     content_tag 'ul', links.html_safe, class: 'pagination'
   end
 end

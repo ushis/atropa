@@ -3,49 +3,36 @@ require 'open-uri'
 module VideoUrl
 
   def VideoUrl.info(url)
-    video_url = nil
-
     self.constants.each do |provider|
       begin
-        video_url = self.const_get(provider).new(url) and break
+        return self.const_get(provider).info(url)
       rescue
         next
       end
     end
 
-    raise 'Invalid url' if video_url.nil?
-    video_url.info
+    raise 'Invalid url'
   end
 
-  def api_url(url, pattern, api)
-    raise ArgumentError, 'Invalid uri' if (matches = pattern.match(url)).nil?
+  def self.video_info(url, pattern, api)
+    raise 'Invalid url' if (matches = pattern.match(url)).nil?
 
     begin
-      api.gsub '{id}', matches[1]
-    rescue KeyError
-      raise ArgumentError, 'Invalid pattern'
+      ActiveSupport::JSON.decode open(api.gsub('{id}', matches[1])).read()
+    rescue
+      raise 'Could not retrieve video info'
     end
-  end
-
-  def video_info
-    ActiveSupport::JSON.decode open(@api).read()
-  rescue
-    raise 'Could not retrieve video info'
   end
 end
 
+
 class VideoUrl::VimeoUrl
-  include VideoUrl
 
   PATTERN = /^http(?:s)?:\/\/vimeo\.com\/([0-9]+)$/
   API = 'http://vimeo.com/api/v2/video/{id}.json'
 
-  def initialize(url)
-    @api = api_url url, PATTERN, API
-  end
-
-  def info
-    data = self.video_info[0]
+  def self.info(url)
+    data = VideoUrl.video_info(url, PATTERN, API)[0]
 
     {vid:      data['id'],
      title:    data['title'],
@@ -58,18 +45,14 @@ class VideoUrl::VimeoUrl
   end
 end
 
+
 class VideoUrl::YoutubeUrl
-  include VideoUrl
 
   PATTERN = /^http(?:s)?:\/\/(?:www\.)?youtube\.com[^ \n]*(?:[\?&]v=)([^ &\n]+)/
   API = 'https://gdata.youtube.com/feeds/api/videos/{id}?v=2&alt=json'
 
-  def initialize(url)
-    @api = api_url url, PATTERN, API
-  end
-
-  def info
-    data = self.video_info['entry']
+  def self.info(url)
+    data = VideoUrl.video_info(url, PATTERN, API)['entry']
 
     {vid:      data['media$group']['yt$videoid']['$t'],
      title:    data['title']['$t'],
