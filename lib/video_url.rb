@@ -2,7 +2,7 @@ require 'open-uri'
 
 module VideoUrl
 
-  def VideoUrl.info(url)
+  def self.info(url)
     self.constants.each do |provider|
       begin
         return self.const_get(provider).info(url)
@@ -14,7 +14,7 @@ module VideoUrl
     raise 'Invalid url'
   end
 
-  def self.video_info(url, pattern, api)
+  def self.request(url, pattern, api)
     raise 'Invalid url' if (matches = pattern.match(url)).nil?
 
     begin
@@ -32,7 +32,7 @@ class VideoUrl::VimeoUrl
   API = 'http://vimeo.com/api/v2/video/{id}.json'
 
   def self.info(url)
-    data = VideoUrl.video_info(url, PATTERN, API)[0]
+    data = VideoUrl.request(url, PATTERN, API)[0]
 
     {vid:      data['id'],
      title:    data['title'],
@@ -52,7 +52,7 @@ class VideoUrl::YoutubeUrl
   API = 'https://gdata.youtube.com/feeds/api/videos/{id}?v=2&alt=json'
 
   def self.info(url)
-    data = VideoUrl.video_info(url, PATTERN, API)['entry']
+    data = VideoUrl.request(url, PATTERN, API)['entry']
 
     {vid:      data['media$group']['yt$videoid']['$t'],
      title:    data['title']['$t'],
