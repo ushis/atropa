@@ -28,7 +28,7 @@ end
 
 class VideoUrl::VimeoUrl
 
-  PATTERN = /^http(?:s)?:\/\/vimeo\.com\/([0-9]+)$/
+  PATTERN = /\Ahttp(?:s)?:\/\/vimeo\.com\/([0-9]+)\z/
   API = 'http://vimeo.com/api/v2/video/{id}.json'
 
   def self.info(url)
@@ -48,7 +48,7 @@ end
 
 class VideoUrl::YoutubeUrl
 
-  PATTERN = /^http(?:s)?:\/\/(?:www\.)?youtube\.com[^ \n]*(?:[\?&]v=)([^ &\n]+)/
+  PATTERN = /\Ahttp(?:s)?:\/\/(?:www\.)?youtube\.com[^ \n]*(?:[\?&]v=)([^ &\n]+)/
   API = 'https://gdata.youtube.com/feeds/api/videos/{id}?v=2&alt=json'
 
   def self.info(url)
