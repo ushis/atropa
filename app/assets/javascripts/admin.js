@@ -23,6 +23,23 @@
     });
   };
 
+  $.fn.magicRemoveAfterTimeout = function(options) {
+    var settings = $.extend({
+      timeout: 3000,
+      duration: 600
+    }, options);
+
+    return this.each(function() {
+      var el = $(this);
+
+      setTimeout(function() {
+        el.slideUp(settings.duration, function() {
+          $(this).remove();
+        });
+      }, settings.timeout);
+    });
+  };
+
   $.fn.magicComplete = function(values) {
     return this.each(function() {
       $(this).autocomplete({

@@ -31,6 +31,6 @@ class Tag < ActiveRecord::Base
   end
 
   def add_slug
-    self.slug = self.tag.paramterize
+    self.slug = self.tag.parameterize
   end
 end
