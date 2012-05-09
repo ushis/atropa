@@ -63,6 +63,7 @@ a, input[type=submit].button {
 
 a:hover, input[type=submit].button:hover {
   color: #999;
+  background-color: transparent;
 }
 
 iframe {
@@ -101,6 +102,22 @@ input[type=password]:hover, input[type=password]:focus {
   color: #111;
   background-color: #fff;
   border-color: #aaa;
+}
+
+input[type=submit] {
+  padding: 4px 8px;
+  font-size: .8em;
+  color: #f9f9f9;
+  background-color: #444;
+  border: 1px solid #222;
+  border-radius: 2px;
+  cursor: pointer;
+}
+
+input[type=submit]:hover {
+  color: #fff;
+  background-color: #222;
+  border-color: #000;
 }
 
 form h1 img {

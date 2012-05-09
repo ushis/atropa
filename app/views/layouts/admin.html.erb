@@ -28,7 +28,7 @@
             </div>
             <ul>
               <li class="avatar">
-                <%= gravatar_tag current_user.email %>
+                <%= gravatar_tag current_user.email, 50 %>
               </li>
               <li>
                 <%= link_to 'Profile', edit_admin_user_path(current_user) %>

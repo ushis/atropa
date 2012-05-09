@@ -1,6 +1,6 @@
 <%= form_for [:admin, @user] do |f| %>
   <h1>
-    <%= gravatar_tag @user.email, 32 %>
+    <%= link_to gravatar_tag(@user.email, 32), 'https://secure.gravatar.com/' %>
     <%= @user.username %>
   </h1>
   <p>
