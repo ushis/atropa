@@ -161,6 +161,7 @@ form ul.errors li {
   right: 0;
   left: 0;
   background-color: #333;
+  z-index: 999;
 }
 
 #header nav {
