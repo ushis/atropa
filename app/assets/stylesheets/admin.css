@@ -66,7 +66,7 @@ a:hover, input[type=submit].button:hover {
 }
 
 iframe {
-  margin: 12px 0;
+  margin-top: 12px;
   background-color: #111;
 }
 
@@ -103,17 +103,55 @@ input[type=password]:hover, input[type=password]:focus {
   border-color: #aaa;
 }
 
-form div.avatar {
-  float: left;
-  margin: 0 20px 20px 0;
+form h1 img {
+  margin-right: 8px;
+  vertical-align: bottom;
+  border-radius: 2px;
 }
 
-form div.fields {
-  margin-left: 140px;
+form p {
+  margin: 12px 0;
 }
 
-form div.fields p {
-  margin: 10px 0;
+form ul.errors {
+  display: inline-block;
+  position: relative;
+  margin-top: 8px;
+  padding: 2px 20px 2px 30px;
+  font-size: .7em;
+  font-weight: bold;
+  color: #111;
+  background-color: #f9f9f9;
+  border: 1px solid #b0b0b0;
+  border-radius: 2px;
+}
+
+form ul.errors:before, form ul.errors:after {
+  content: ' ';
+  position: absolute;
+  bottom: 100%;
+  width: 0;
+  height: 0;
+  border: 8px solid transparent;
+  border-top-width: 0;
+}
+
+form ul.errors:before {
+  left: 12px;
+  border-bottom-color: #b0b0b0;
+}
+
+form ul.errors:after {
+  left: 13px;
+  border-width: 7px;
+  border-top-width: 0;
+  border-bottom-color: #f9f9f9;
+}
+
+
+form ul.errors li {
+  padding: 4px 0;
+  list-style-type: square;
 }
 
 /* Header */
@@ -259,6 +297,11 @@ ul.video-list li div.preview {
   overflow: hidden;
   background-color: #000;
   border-radius: 2px 0 0 2px;
+  opacity: .9;
+}
+
+ul.video-list li:hover div.preview {
+  opacity: 1;
 }
 
 ul.video-list li div.description {
@@ -289,7 +332,7 @@ div.flash {
   font-size: 12px;
   font-weight: bold;
   color: #f0f0f0;
-  background-color: #444;
+  background-color: #666;
   border-radius: 2px;
 }
 

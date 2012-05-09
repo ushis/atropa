@@ -15,9 +15,8 @@ class Admin::LoginController < AdminController
   def login
     @title = 'Log In'
     @username = params[:username]
-    user = User.find_by_username @username
 
-    if user.nil? || ! user.authenticate(params[:password])
+    if ! user = User.find_by_username(@username).try(:authenticate, params[:password])
       flash.now[:alert] = 'Wrong username/password combo.'
     elsif ! user.refresh_login_hash!
       flash.now[:alert] = 'Something went wrong. Let\'s try it again.'

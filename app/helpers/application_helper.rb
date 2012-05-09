@@ -8,6 +8,14 @@ module ApplicationHelper
     ret.html_safe
   end
 
+  def error_list(errors)
+    return nil if errors.size == 0
+
+    content_tag 'ul', class: 'errors' do
+      errors.collect { |e| content_tag('li', e) }.join('').html_safe
+    end
+  end
+
   def gravatar_tag(email, size = 50)
     size = size.to_s
     uri = 'https://secure.gravatar.com/avatar/'

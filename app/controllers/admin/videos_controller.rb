@@ -12,19 +12,19 @@ class Admin::VideosController < AdminController
     video = Video.new VideoUrl.info(params[:url])
   rescue => e
     flash[:alert] = e.message
-    redirect_to(request.referer) and return
+    redirect_to(:back) and return
   else
     video.user = current_user
     redirect_to(action: :edit, id: video) and return if video.save
     flash[:alert] = 'Could not safe video.'
-    redirect_to(request.referer)
+    redirect_to :back
   end
 
   def edit
     @video = Video.includes(:tags, :user).find params[:id]
   rescue
     flash[:alert] = 'Could not find video.'
-    redirect_to(request.referer) and return
+    redirect_to :back and return
   else
     @title = @video.title
     @bodyclass = 'form'
@@ -35,7 +35,7 @@ class Admin::VideosController < AdminController
     @video = Video.find params[:id]
   rescue
      flash[:alert] = 'Could not find video'
-     redirect_to(request.referer) and return
+     redirect_to :back and return
   else
     @video.tags = Tag.from_s(params[:tags]) if params[:tags]
 
@@ -48,14 +48,14 @@ class Admin::VideosController < AdminController
     @title = @video.title
     @bodyclass = 'form'
     @tags = Tag.all_as_a
-    render(:edit)
+    render :edit
   end
 
   def destroy
     video = Video.find params[:id]
   rescue
     flash[:alert] = 'Could not find video.'
-    redirect_to(request.referer) and return
+    redirect_to :back and return
   else
     if video.delete
       flash[:notice] = 'Deleted video.'
@@ -63,6 +63,6 @@ class Admin::VideosController < AdminController
       flash[:alert] = 'Could not delete video.'
     end
 
-    redirect_to(request.referer)
+    redirect_to :back
   end
 end
