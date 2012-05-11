@@ -33,3 +33,7 @@
 </ul>
 
 <%= pagination_links @pagination %>
+
+<script>
+  $('input.del').click(function() { return confirm('Really?'); });
+</script>
