@@ -1,0 +1,27 @@
+<article>
+  <div class="video">
+    <div class="preview">
+      <%= video_preview video, 640 %>
+    </div>
+    <div class="player">
+      <%= link_to '▶', video_iframe_src(video), class: 'play' %>
+    </div>
+  </div>
+  <footer>
+    <ul class="links">
+      <li>
+        <%= video_link video, '↗' %>
+      </li>
+      <li>
+        <%= link_to '#', video_path(id: video, slug: video.slug) %>
+      </li>
+    </ul>
+    <ul class="tags">
+      <% video.tags.each do |tag| %>
+        <li>
+          <%= link_to tag.tag, tag_path(id: tag, slug: tag.slug) %>
+        </li>
+      <% end %>
+    </ul>
+  </footer>
+</article>

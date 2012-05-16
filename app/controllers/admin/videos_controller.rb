@@ -12,7 +12,7 @@ class Admin::VideosController < AdminController
     video = Video.new VideoUrl.info(params[:url])
   rescue => e
     flash[:alert] = e.message
-    redirect_to(:back) and return
+    redirect_to :back and return
   else
     video.user = current_user
     redirect_to(action: :edit, id: video) and return if video.save

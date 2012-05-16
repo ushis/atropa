@@ -1,0 +1,11 @@
+<div class="articles">
+  <% @videos.each do |video| %>
+    <%= render partial: 'video', locals: {video: video} %>
+  <% end %>
+</div>
+
+<%= pagination_links @pagination if @pagination %>
+
+<script>
+  $('div.video').atropaVideo();
+</script>

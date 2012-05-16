@@ -1,7 +1,14 @@
 Atropa::Application.routes.draw do
+
+  # Public routes
   root :to => 'public#index'
 
-  get 'admin(/videos/:page)' => 'admin/videos#index', :as => :admin
+  get 'videos(/:page)'          => 'public#index'
+  get 'tag/:id(/:slug(/:page))' => 'public#tag',   as: :tag
+  get 'video/:id(/:slug)'       => 'public#video', as: :video
+
+  # Admin routes
+  get 'admin(/videos/:page)' => 'admin/videos#index', as: :admin
 
   namespace :admin do
     resources :videos

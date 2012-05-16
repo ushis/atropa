@@ -4,7 +4,7 @@ module ApplicationHelper
 
   def flash_all
     ret = ''
-    flash.each {|key, msg| ret += content_tag 'div', msg, :class => 'flash ' + key.to_s}
+    flash.each { |key, msg| ret << content_tag('div', msg, :class => 'flash ' + key.to_s) }
     ret.html_safe
   end
 

@@ -2,7 +2,7 @@
   <% @videos.each do |video| %>
     <li>
       <div class="preview">
-        <%= link_to image_tag(video.preview, width: 140), edit_admin_video_path(video) %>
+        <%= link_to video_preview(video, 140), edit_admin_video_path(video) %>
       </div>
       <div class="description">
         <h2>

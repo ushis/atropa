@@ -1,0 +1,152 @@
+/* Reset */
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+	text-decoration: none;
+}
+
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+
+body {
+	font: normal normal normal .9em/1.6 Helvetica, Arial, sans-serif;
+    background-color: #111;
+}
+
+ol, ul {
+	list-style: none;
+}
+
+blockquote, q {
+	quotes: none;
+}
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+/* Elements */
+a {
+  color: #555;
+}
+
+a:hover {
+  color: #ff7916;
+}
+
+/* Main */
+#wrapper {
+  width: 640px;
+  margin: 50px auto;
+}
+
+#wrapper > header {
+  padding: 20px 0;
+}
+
+#wrapper > header h1 a {
+  display: block;
+  width: 147px;
+  height: 41px;
+  text-indent: -9999px;
+  background: transparent url('/assets/atropa.png') left top no-repeat;
+}
+
+/* Videos */
+article {
+  float: left;
+  clear: both;
+  width: 100%;
+  margin: 50px 0;
+}
+
+article:first-child {
+  margin-top: 0;
+}
+
+div.video {
+  position: relative;
+}
+
+div.video div.preview img, div.video iframe {
+  vertical-align: bottom;
+}
+
+div.video div.player, div.video a.play {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  font-size: 100px;
+  text-align: center;
+  line-height: 300px;
+  color: #ff7916;
+}
+
+div.video a.play:hover {
+  color: #111;
+}
+
+article footer {
+  padding-top: 10px;
+}
+
+article footer ul.links li {
+  float: right;
+  margin-left: 8px;
+}
+
+article footer ul.tags li {
+  float: left;
+}
+
+article footer ul.tags li:nth-child(n+2):before {
+  content: '/';
+  margin: 0 6px 0 10px;
+  color: #555;
+}
+
+/* Pagination */
+ul.pagination {
+  float: left;
+  width: 100%;
+  margin: 0 0 50px -6px;
+}
+
+ul.pagination li {
+  float: left;
+}
+
+ul.pagination li > * {
+  padding: 6px;
+}
+
+ul.pagination li span {
+  color: #ff7916;
+}
