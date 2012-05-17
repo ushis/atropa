@@ -1,6 +1,7 @@
 class Admin::LoginController < AdminController
   layout 'aether'
 
+  before_filter lambda { @title = 'Log In' }
   before_filter :forward, only: [:form, :login]
   skip_before_filter :authenticate, only: [:form, :login]
 
@@ -9,11 +10,9 @@ class Admin::LoginController < AdminController
   end
 
   def form
-    @title = 'Log In'
   end
 
   def login
-    @title = 'Log In'
     @username = params[:username]
 
     if ! user = User.find_by_username(@username).try(:authenticate, params[:password])
@@ -29,7 +28,6 @@ class Admin::LoginController < AdminController
   end
 
   def logout
-    @title = 'Log In'
     @username = current_user.username
     session[:login_hash] = nil
     render :form

@@ -1,14 +1,12 @@
 class Admin::UsersController < AdminController
 
+  before_filter lambda { @title = 'Profile'; @body_class = 'form' }
+
   def edit
-    @title = 'Profile'
-    @bodyclass = 'form'
     @user = current_user
   end
 
   def update
-    @title = 'Profile'
-    @bodyclass = 'form'
     @user = current_user
 
     unless @user.authenticate(params[:user][:password_old])
