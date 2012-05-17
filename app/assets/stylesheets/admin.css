@@ -347,12 +347,21 @@ ul.video-list li ul.tags li:nth-child(n+2):before {
 
 /* Flash */
 div.flash {
-  padding: 4px 10px;
+  padding: 4px 12px;
   font-size: 12px;
   font-weight: bold;
   color: #f0f0f0;
   background-color: #666;
   border-radius: 2px;
+}
+
+div.flash span.rm {
+  float: right;
+  cursor: pointer;
+}
+
+div.flash span.rm:hover {
+  color: #aaa;
 }
 
 /* Pagination */

@@ -23,22 +23,19 @@
     });
   };
 
-  $.fn.magicRemoveAfterTimeout = function(options) {
-    var settings = $.extend({
-      timeout: 3000,
-      duration: 600
-    }, options);
-
+  $.fn.magicRemoveButton = function() {
     return this.each(function() {
       var el = $(this);
 
-      setTimeout(function() {
-        el.slideUp(settings.duration, function() {
-          $(this).remove();
-        });
-      }, settings.timeout);
+      el.append(
+        $('<span>').addClass('rm').text('×').click(function() {
+          el.fadeOut(400, function() {
+            $(this).remove();
+          });
+        })
+      );
     });
-  };
+  }
 
   $.fn.magicComplete = function(values) {
     return this.each(function() {
