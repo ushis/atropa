@@ -26,7 +26,7 @@ module VideoUrl
 end
 
 
-class VideoUrl::VimeoUrl
+module VideoUrl::VimeoUrl
 
   PATTERN = /\Ahttp(?:s)?:\/\/vimeo\.com\/([0-9]+)\z/
   API = 'http://vimeo.com/api/v2/video/{id}.json'
@@ -46,7 +46,7 @@ class VideoUrl::VimeoUrl
 end
 
 
-class VideoUrl::YoutubeUrl
+module VideoUrl::YoutubeUrl
 
   PATTERN = /\Ahttp(?:s)?:\/\/(?:www\.)?youtube\.com[^ \n]*(?:[\?&]v=)([^ &\n]+)/
   API = 'https://gdata.youtube.com/feeds/api/videos/{id}?v=2&alt=json'

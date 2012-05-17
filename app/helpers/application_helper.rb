@@ -34,6 +34,8 @@ module ApplicationHelper
   end
 
   def pagination_links(info)
+    return nil if info[:total] < 2
+
     links = info[:current] > 1 ? pagination_link('<', info[:url], info[:current] - 1) : ''
 
     (1..info[:total]).each do |i|

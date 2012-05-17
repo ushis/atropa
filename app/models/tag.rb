@@ -22,10 +22,6 @@ class Tag < ActiveRecord::Base
     ret + tags.collect { |tag| self.new(tag: tag) }
   end
 
-  def self.all_as_a
-    self.order(:tag).all.collect { |tag| tag.tag }
-  end
-
   def to_s
     self.tag
   end

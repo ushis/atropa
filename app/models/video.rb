@@ -9,21 +9,24 @@ class Video < ActiveRecord::Base
 
   before_create :add_slug
 
-  def self.paginate(page, per_page = 10)
-    total = self.count
-    info = {total: (total / per_page.to_f).ceil}
+  def self.paginate(page, options = {})
+    opts = {per_page: 10, order: 'created_at DESC'}.update(options)
 
-    info[:current] = case
-                     when page > info[:total]
-                       info[:total]
-                     when page < 1
-                       1
-                     else
-                       page
-                     end
+    query = self
+    opts[:includes].each { |i| query = query.includes(i) } if opts[:includes]
+    opts[:conditions].each { |col, val| query = query.where(col, val) } if opts[:conditions]
+    total = query.count.fdiv(opts[:per_page]).ceil
 
-    [self.includes(:tags, :user).order('videos.created_at DESC').limit(per_page)
-     .offset((info[:current] -1) * per_page).all, info]
+    return [[], {total: 0, current: 1}] if total == 0
+
+    if page > total
+      page = total
+    elsif page < 1
+      page = 1
+    end
+
+    [query.order(opts[:order]).limit(opts[:per_page]).offset((page - 1) * opts[:per_page]).all,
+     {total: total, current: page}]
   end
 
   def add_slug

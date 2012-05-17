@@ -4,7 +4,7 @@ class Admin::VideosController < AdminController
 
   def index
     @title = 'Videos'
-    @videos, @pagination = Video.paginate(params[:page] ? params[:page].to_i : 1)
+    @videos, @pagination = Video.paginate(params[:page].to_i, includes: [:tags, :user])
     @pagination[:url] = {action: :index}
   end
 
@@ -28,7 +28,7 @@ class Admin::VideosController < AdminController
   else
     @title = @video.title
     @bodyclass = 'form'
-    @tags = Tag.all_as_a
+    @tags = Tag.order(:tag).pluck(:tag)
   end
 
   def update
