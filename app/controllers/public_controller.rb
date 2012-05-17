@@ -25,7 +25,7 @@ class PublicController < ActionController::Base
 
     @videos = tag.videos[(page - 1) * 6, 6]
     @pagination = {total: total, current: page, url: {action: :tag, id: tag, slug: tag.slug}}
-    @title = tag.tag
+    @title = tag.tag + ' : page ' + page.to_s
     render :index
   end
 
