@@ -47,7 +47,7 @@ class Admin::VideosController < AdminController
 
     @title = @video.title
     @bodyclass = 'form'
-    @tags = Tag.all_as_a
+    @tags = Tag.order(:tag).pluck(:tag)
     render :edit
   end
 

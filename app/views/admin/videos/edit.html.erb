@@ -13,7 +13,7 @@
       <%= video_link @video %>
     </li>
     <li>
-      <%= link_to '↗', '#' %>
+      <%= link_to '↗', video_path(id: @video, slug: @video.slug) %>
     </li>
   </ul>
   <div class="iframe">
