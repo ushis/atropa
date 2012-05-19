@@ -7,8 +7,18 @@
 
   $.fn.magicSearch = function(url, field) {
     return this.each(function() {
+      var el = $(this).find('input[name=' + field + ']')
+
+      el.blur(function() {
+        if (el.val().trim().length === 0) {
+          el.addClass('empty');
+        }
+      }).focus(function() {
+        el.removeClass('empty');
+      });
+
       $(this).submit(function() {
-        var val = $(this).find('input[name=' + field + ']').val().trim();
+        var val = el.val().trim();
 
         if (val.length > 0) {
           window.location = url + '/' + val;

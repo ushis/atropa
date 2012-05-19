@@ -37,7 +37,7 @@
           </li>
           <li>
             <%= form_tag search_path, id: 'search' do %>
-              <%= text_field_tag :q, @q, placeholder: 'finden..' %>
+              <%= text_field_tag :q, @q, {class: @q ? nil : 'empty'} %>
             <% end %>
           </li>
         </ul>
