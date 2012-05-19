@@ -10,9 +10,10 @@ class PublicController < ActionController::Base
   end
 
   def search
-    redirect_to action: :index if ! params[:q] || params[:q].blank?
+    redirect_to action: :index and return if ! params[:q] || params[:q].blank?
+
     @q = params[:q]
-    @videos, @pagination = paginate_videos({conditions: {'videos.title like ?' => '%' + @q + '%'}})
+    @videos, @pagination = paginate_videos(conditions: {'videos.title like ?' => '%' + @q + '%'})
     @pagination[:url] = {action: :search}
     @title = @q + ' : page ' + @pagination[:current].to_s
     render :index

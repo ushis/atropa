@@ -46,7 +46,7 @@ class Admin::VideosController < AdminController
   def destroy
     return unless video = find_or_go_back(params[:id])
 
-    if video.delete
+    if video.destroy
       flash[:notice] = 'Deleted video.'
     else
       flash[:alert] = 'Could not delete video.'
