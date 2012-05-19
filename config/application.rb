@@ -57,6 +57,6 @@ module Atropa
     config.assets.version = '1.0'
 
     # Precompile all .css, .js and .png
-    config.assets.precompile = ['*.css', '*.js', '*.png']
+    config.assets.precompile = ['*.css', '*.js', '*.png', '*.gif']
   end
 end
