@@ -13,7 +13,7 @@ class Video < ActiveRecord::Base
     opts = {per_page: 10, order: 'created_at DESC'}.update(options)
 
     query = self
-    opts[:includes].each { |i| query = query.includes(i) } if opts[:includes]
+    query = query.includes(*opts[:includes]) if opts[:includes]
     opts[:conditions].each { |col, val| query = query.where(col, val) } if opts[:conditions]
     total = query.count.fdiv(opts[:per_page]).ceil
 

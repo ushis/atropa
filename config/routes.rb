@@ -3,9 +3,12 @@ Atropa::Application.routes.draw do
   # Public routes
   root :to => 'public#index'
 
-  get 'videos(/:page)'          => 'public#index'
-  get 'tag/:id(/:slug(/:page))' => 'public#tag',   as: :tag
-  get 'video/:id(/:slug)'       => 'public#video', as: :video
+  get  'videos(/:page)'          => 'public#index'
+  get  'tag/:id(/:slug(/:page))' => 'public#tag',    as: :tag
+  get  'video/:id(/:slug)'       => 'public#video',  as: :video
+
+  get  'search(/:q(/:page))'     => 'public#search',          as: :search
+  post 'search'                  => 'public#redirect_search', as: :search
 
   # Admin routes
   get 'admin(/videos/:page)' => 'admin/videos#index', as: :admin

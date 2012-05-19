@@ -50,6 +50,18 @@ table {
 	border-spacing: 0;
 }
 
+input {
+  outline: 0;
+}
+
+input::-webkit-input-placeholder {
+  color: #555;
+}
+
+input:-moz-placeholder {
+  color: #555;
+}
+
 /* Elements */
 a {
   color: #555;
@@ -66,6 +78,7 @@ a:hover {
 }
 
 #wrapper > header {
+  position: relative;
   padding: 30px 0;
 }
 
@@ -75,6 +88,112 @@ a:hover {
   height: 41px;
   text-indent: -9999px;
   background: transparent url('/assets/atropa.png') left top no-repeat;
+}
+
+#tools {
+  float: right;
+  margin-top: 3px;
+  background-color: #222;
+  border-radius: 3px;
+  z-index: 9999;
+}
+
+#tools > li {
+  float: left;
+}
+
+#tools > li > * {
+  display: block;
+  padding: 0 10px;
+  line-height: 32px;
+  font-size: 14px;
+}
+
+#tools div.sub-link {
+  position: relative;
+  color: #555;
+  cursor: default;
+}
+
+#tools div.sub-link:before, #tools div.sub-link:after {
+  content: ' ';
+  display: none;
+  position: absolute;
+  bottom: -12px;
+  width: 0;
+  height: 0;
+  border: 0 solid transparent;
+  z-index: 100;
+}
+
+#tools div.sub-link:before {
+  margin-left: -1px;
+  border-width: 12px;
+  border-top-width: 0;
+  border-bottom-color: #383838;
+}
+
+#tools div.sub-link:after {
+  border-width: 11px;
+  border-top-width: 0;
+  border-bottom-color: #222;
+}
+
+#tools li:hover div.sub-link {
+  color: #ff7916;
+}
+
+#tools li:hover div.sub-link:before,
+#tools li:hover div.sub-link:after {
+  display: block;
+}
+
+#tools input[type=text] {
+  width: 160px;
+  height: 16px;
+  padding: 2px 6px;
+  font-size: 13px;
+  color: #555;
+  background-color: #111;
+  border: 1px solid #222;
+  border-radius: 3px;
+}
+
+#tools input[type=text]:focus {
+  color: #aaa;
+  border-color: #2c2c2c;
+}
+
+#tools div.sub {
+  display: none;
+  position: absolute;
+  right: 0;
+  padding: 11px 0 0 0;
+  z-index: 99;
+}
+
+#tools li:hover div.sub {
+  display: block;
+}
+
+#tools div.sub > div {
+  float: left;
+  padding: 10px;
+  background-color: #222;
+  border: 1px solid #383838;
+  border-radius: 3px;
+  box-shadow: 0 0 3px rgba(46, 46, 46, .8);
+}
+
+#tools div.sub ul.tags {
+  float: left;
+  margin: 0 10px;
+  line-height: 20px;
+  font-size: 13px;
+}
+
+#tools div.sub ul.tags li.cur a {
+  color: #ff7916;
 }
 
 /* Videos */
