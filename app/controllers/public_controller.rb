@@ -29,7 +29,7 @@ class PublicController < ActionController::Base
   def tag
     @tag = Tag.includes(videos: :tags).order('videos.created_at DESC').find params[:id]
   rescue
-    not_found
+    not_found and return
   else
     total = @tag.videos.length.fdiv(6).ceil
     page = params[:page].to_i
@@ -49,7 +49,7 @@ class PublicController < ActionController::Base
   def video
     video = Video.includes(:tags).find params[:id]
   rescue
-    not_found
+    not_found and return
   else
     @title = video.title
     @videos = [video]
@@ -68,6 +68,7 @@ class PublicController < ActionController::Base
   end
 
   def not_found
-    raise ActionController::RoutingError.new('404')
+    @title = '404'
+    render :index
   end
 end

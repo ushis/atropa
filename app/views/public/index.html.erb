@@ -1,6 +1,12 @@
 <div class="articles">
-  <% @videos.each do |video| %>
-    <%= render partial: 'video', locals: {video: video} %>
+  <% if @videos && @videos.length > 0 %>
+    <% @videos.each do |video| %>
+      <%= render partial: 'video', locals: {video: video} %>
+    <% end %>
+  <% else %>
+    <article>
+      <%= image_tag '404.gif', alt: '404', width: 640, height: 480 %>
+    </article>
   <% end %>
 </div>
 
