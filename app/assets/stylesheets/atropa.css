@@ -94,7 +94,7 @@ a:hover {
   float: right;
   margin-top: 4px;
   background-color: #222;
-  border-radius: 3px;
+  border-radius: 2px;
   z-index: 9999;
 }
 
@@ -156,7 +156,7 @@ a:hover {
   color: #555;
   background-color: #111;
   border: 1px solid #222;
-  border-radius: 3px;
+  border-radius: 2px;
 }
 
 #tools input[type=text]:focus {
@@ -181,7 +181,7 @@ a:hover {
   padding: 10px;
   background-color: #222;
   border: 1px solid #383838;
-  border-radius: 3px;
+  border-radius: 2px;
   box-shadow: 0 0 3px rgba(46, 46, 46, .8);
 }
 
