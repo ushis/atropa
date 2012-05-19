@@ -157,11 +157,11 @@ a:hover {
   background-color: #111;
   border: 1px solid #222;
   border-radius: 2px;
-  -webkit-transition: width .4s;
-  -moz-transition: width .4s;
-  -o-transition: width .4s;
-  -ms-transition: width .4s;
-  transition: width .4s;
+  -webkit-transition: width .4s, background-color .4s;
+  -moz-transition: width .4s, background-color .4s;
+  -o-transition: width .4s, background-color .4s;
+  -ms-transition: width .4s, background-color .4s;
+  transition: width .4s, background-color .4s;
 }
 
 #tools input[type=text].empty {
