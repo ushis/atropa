@@ -6,6 +6,7 @@ Atropa::Application.routes.draw do
   get  'videos(/:page)'          => 'public#index'
   get  'tag/:id(/:slug(/:page))' => 'public#tag',             as: :tag
   get  'video/:id(/:slug)'       => 'public#video',           as: :video
+  get  'feed'                    => 'public#feed',            as: :feed
   get  'search(/:q(/:page))'     => 'public#search',          as: :search
   post 'search'                  => 'public#redirect_search', as: :search
 

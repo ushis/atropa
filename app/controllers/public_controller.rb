@@ -57,6 +57,14 @@ class PublicController < ActionController::Base
     render :index
   end
 
+  def feed
+    @videos = Video.includes(:user).order('created_at DESC').limit(20).all
+
+    respond_to do |format|
+      format.atom { render layout: false }
+    end
+  end
+
   private
   def paginate_videos(opts = {})
     options = {includes: [:tags], per_page: 6}
