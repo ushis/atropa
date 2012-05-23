@@ -2,7 +2,7 @@ require 'video_url'
 
 class Api::VideosController < ApiController
   def index
-    videos = Video.includes(:tags, :user).where(id: current_user).all
+    videos = Video.includes(:tags, :user).where(user_id: current_user).all
     respond(videos.collect { |video| video.api_friendly })
   end
 
