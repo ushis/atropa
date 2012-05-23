@@ -23,6 +23,7 @@ class Admin::UsersController < AdminController
     end
 
     flash.now[:alert] = 'Could not save changes.' unless @user.save
+    @user.refresh_api_key! if params[:refresh_api_key]
     render :edit
   end
 end

@@ -3,6 +3,12 @@
     <%= link_to gravatar_tag(@user.email, 32), 'https://secure.gravatar.com/' %>
     <%= @user.username %>
   </h1>
+  <p class="api-key">
+    API Key
+    <span><%= @user.api_key %></span>
+    <%= check_box_tag :refresh_api_key %>
+    <%= label_tag :refresh_api_key, 'refresh' %>
+  </p>
   <p>
     <%= f.text_field :email, placeholder: 'Insert your email' %>
     <%= error_list @user.errors[:email] %>
