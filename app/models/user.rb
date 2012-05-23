@@ -1,4 +1,5 @@
 require 'digest/sha1'
+require 'uuidtools'
 
 class User < ActiveRecord::Base
   attr_accessible :username, :email, :password, :password_confirmation
@@ -11,11 +12,25 @@ class User < ActiveRecord::Base
   has_many :videos
 
   def refresh_login_hash!
-    self.login_hash = Digest::SHA1.hexdigest Time.now.to_s + self.username
-    self.save
+    self.login_hash = unique_hash
+    save
+  end
+
+  def refresh_api_key!
+    self.api_key = unique_hash
+    save
+  end
+
+  def confirm_signature(data, signature)
+    Digest::SHA1.hexdigest(data + self.api_key) == signature
   end
 
   def to_s
     self.username
+  end
+
+  private
+  def unique_hash
+    Digest::SHA1.hexdigest UUIDTools::UUID.random_create.to_s
   end
 end

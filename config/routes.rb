@@ -20,4 +20,9 @@ Atropa::Application.routes.draw do
     post   'login' => 'login#login'
     delete 'login' => 'login#logout'
   end
+
+  # Api routes
+  namespace :api do
+    resources :videos
+  end
 end

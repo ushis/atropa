@@ -32,4 +32,12 @@ class Video < ActiveRecord::Base
   def add_slug
     self.slug = self.title.parameterize
   end
+
+  def api_friendly
+    {id: id,
+     user: user.username,
+     title: title,
+     preview: preview,
+     tags: tags.collect { |tag| tag.tag }}
+  end
 end

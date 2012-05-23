@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 1) do
+ActiveRecord::Schema.define(:version => 2) do
 
   create_table "tags", :force => true do |t|
     t.string "tag",  :null => false
@@ -29,6 +29,7 @@ ActiveRecord::Schema.define(:version => 1) do
     t.string   "email",           :null => false
     t.string   "login_hash"
     t.datetime "created_at",      :null => false
+    t.string   "api_key"
   end
 
   create_table "videos", :force => true do |t|
