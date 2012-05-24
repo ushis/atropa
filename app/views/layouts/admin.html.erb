@@ -26,17 +26,19 @@
             <div>
               <%= current_user.username %>
             </div>
-            <ul>
-              <li class="avatar">
-                <%= gravatar_tag current_user.email, 50 %>
-              </li>
-              <li>
-                <%= link_to 'Profile', edit_admin_user_path(current_user) %>
-              </li>
-              <li>
-                <%= button_to 'Log Out', admin_login_path, method: :delete %>
-              </li>
-            </ul>
+            <nav>
+              <ul>
+                <li class="avatar">
+                  <%= gravatar_tag current_user.email, 50 %>
+                </li>
+                <li>
+                  <%= link_to 'Profile', edit_admin_user_path(current_user) %>
+                </li>
+                <li>
+                  <%= button_to 'Log Out', admin_login_path, method: :delete %>
+                </li>
+              </ul>
+            </nav>
           </li>
           <li>
             <%= link_to 'blog', root_path %>

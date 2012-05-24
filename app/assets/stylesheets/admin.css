@@ -217,22 +217,22 @@ p.api-key span:before {
   z-index: 999;
 }
 
-#header nav {
+#header > nav {
   width: 800px;
   margin: 0 auto;
 }
 
-#header nav > ul > li {
+#header > nav > ul > li {
   position: relative;
   float: left;
 }
 
-#header nav > ul > li:nth-child(n+3) {
+#header > nav > ul > li:nth-child(n+3) {
   float: right;
 }
 
-#header nav  ul li a, #header nav ul li > div,
-#header nav ul li input[type=submit] {
+#header ul li a, #header nav ul li > div,
+#header ul li input[type=submit] {
   display: block;
   padding: 0 10px;
   font-size: 13px;
@@ -243,27 +243,27 @@ p.api-key span:before {
   cursor: pointer;
 }
 
-#header nav ul li a.home {
+#header ul li a.home {
   width: 14px;
   text-indent: -9999px;
   background: transparent url('/assets/a.png') 10px center no-repeat;
 }
 
-#header nav ul li > div:after {
+#header ul li > div:after {
   content: '▼'
 }
 
-#header nav ul li a:hover, #header nav ul li:hover > div,
-#header nav ul li input[type=submit]:hover {
+#header ul li a:hover, #header nav ul li:hover > div,
+#header ul li input[type=submit]:hover {
   color: #fff;
   background-color: #444;
 }
 
-#header nav ul li a.home:hover {
+#header ul li a.home:hover {
   background-position: -14px center;
 }
 
-#header nav ul li input[type=text] {
+#header ul li input[type=text] {
   width: 260px;
   margin: 9px 10px;
   padding: 3px 4px 2px 4px;
@@ -273,23 +273,40 @@ p.api-key span:before {
   box-shadow: inset 1px 1px 2px #999;
 }
 
-#header nav ul li ul {
+#header ul li nav {
   display: none;
   position: absolute;
   right: 0;
-  padding: 6px 0;
-  background-color: #444;
-  border-radius: 0 0 2px 2px;
+  padding-top: 8px;
 }
 
-#header nav ul li:hover ul {
+#header ul li:hover nav {
   display: block;
 }
-#header nav ul li ul li {
+
+#header ul li nav:before {
+  content: ' ';
+  position: absolute;
+  top: -8px;
+  right: 26px;
+  display: block;
+  width: 0;
+  height: 0;
+  border: 8px solid transparent;
+  border-bottom-color: #444;
+}
+
+#header ul li ul {
+  padding: 6px 0;
+  background-color: #444;
+  border-radius: 2px;
+}
+
+#header ul li ul li {
   margin-left: 65px;
 }
 
-#header nav ul li ul li.avatar {
+#header ul li ul li.avatar {
   width: 50px;
   height: 50px;
   float: left;
@@ -298,12 +315,12 @@ p.api-key span:before {
   padding: 5px 0 5px 15px;
 }
 
-#header nav ul li ul li.avatar img {
+#header ul li ul li.avatar img {
   border-radius: 2px;
 }
 
-#header nav ul li ul li a,
-#header nav  ul li ul li input[type=submit] {
+#header ul li ul li a,
+#header ul li ul li input[type=submit] {
   margin: 0;
   padding: 0 20px;
   font-size: 13px;
