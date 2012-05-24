@@ -1,4 +1,4 @@
-require 'video_url'
+require 'videourl'
 
 class Admin::VideosController < AdminController
 

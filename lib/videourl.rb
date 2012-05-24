@@ -29,7 +29,7 @@ end
 module VideoUrl::VimeoUrl
 
   PATTERN = /\Ahttp(?:s)?:\/\/vimeo\.com\/([0-9]+)\z/
-  API = 'http://vimeo.com/api/v2/video/{id}.json'
+  API = 'https://vimeo.com/api/v2/video/{id}.json'
 
   def self.info(url)
     data = VideoUrl.request(url, PATTERN, API)[0]
