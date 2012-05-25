@@ -1,13 +1,12 @@
-<%= form_for [:admin, @user] do |f| %>
+<%= form_for @user, url: admin_profile_path, html: {id: 'user-form'} do |f| %>
+  <div class="avatar">
+    <%= link_to gravatar_tag(@user.email, 74), 'https://secure.gravatar.com/' %>
+  </div>
   <h1>
-    <%= link_to gravatar_tag(@user.email, 32), 'https://secure.gravatar.com/' %>
     <%= @user.username %>
   </h1>
   <p class="api-key">
-    API Key
-    <span><%= @user.api_key %></span>
-    <%= check_box_tag :refresh_api_key %>
-    <%= label_tag :refresh_api_key, 'refresh' %>
+    API Key <span><%= @user.api_key %></span>
   </p>
   <p>
     <%= f.text_field :email, placeholder: 'Insert your email' %>
@@ -27,5 +26,6 @@
   </p>
   <p>
     <%= f.submit 'Save' %>
+    <%= f.submit 'Refresh API Key', name: 'refresh_api_key', class: 'second-choice' %>
   </p>
 <% end %>

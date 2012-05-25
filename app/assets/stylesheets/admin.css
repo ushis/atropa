@@ -116,22 +116,21 @@ input[type=submit] {
   padding: 4px 8px;
   font-size: .8em;
   color: #f9f9f9;
-  background-color: #444;
-  border: 1px solid #222;
+  background-color: #555;
+  border: 1px solid #333;
   border-radius: 2px;
   cursor: pointer;
+}
+
+input[type=submit].second-choice {
+  background-color: #999;
+  border-color: #777;
 }
 
 input[type=submit]:hover {
   color: #fff;
   background-color: #222;
   border-color: #000;
-}
-
-form h1 img {
-  margin-right: 8px;
-  vertical-align: bottom;
-  border-radius: 2px;
 }
 
 form p {
@@ -180,31 +179,9 @@ form ul.errors li {
   list-style-type: square;
 }
 
-p.api-key {
-  font-size: .9em;
-}
-
-p.api-key span {
-  position: relative;
-  margin: 0 10px;
-  padding: 6px 10px;
-  font-size: 14px;
-  font-family: monospace;
-  color: #111;
+.avatar img {
   background-color: #ddd;
-}
-
-p.api-key span:before {
-  content: ' ';
-  position: absolute;
-  right: 100%;
-  top: 50%;
-  margin-top: -7px;
-  display: block;
-  width: 0;
-  height: 0;
-  border: 8px solid transparent;
-  border-right-color: #ddd;
+  border-radius: 2px;
 }
 
 /* Header */
@@ -315,10 +292,6 @@ p.api-key span:before {
   padding: 5px 0 5px 15px;
 }
 
-#header ul li ul li.avatar img {
-  border-radius: 2px;
-}
-
 #header ul li ul li a,
 #header ul li ul li input[type=submit] {
   margin: 0;
@@ -395,6 +368,44 @@ ul.video-list li h2 input[type=submit] {
 ul.video-list li ul.tags li:nth-child(n+2):before {
   content: '/';
   padding: 0 4px;
+}
+
+/* User form */
+#user-form div.avatar {
+  float: left;
+  margin: 0 16px 16px 0;
+}
+
+#user-form p.api-key {
+  font-size: .9em;
+}
+
+#user-form p.api-key span {
+  position: relative;
+  margin: 0 10px;
+  padding: 6px 10px;
+  font-size: 14px;
+  font-family: "Bitstream Vera Sans Mono", "Courier", monospace;
+  color: #000;
+  background-color: #ddd;
+}
+
+#user-form p.api-key span:before {
+  content: ' ';
+  position: absolute;
+  right: 100%;
+  top: 50%;
+  margin-top: -7px;
+  display: block;
+  width: 0;
+  height: 0;
+  border: 8px solid transparent;
+  border-right-color: #ddd;
+}
+
+#user-form input[type=submit] {
+  float: right;
+  margin-left: 10px;
 }
 
 /* Flash */

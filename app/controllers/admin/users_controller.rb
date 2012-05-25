@@ -2,7 +2,7 @@ class Admin::UsersController < AdminController
 
   before_filter lambda { @title = 'Profile'; @body_class = 'form' }
 
-  def edit
+  def profile
     @user = current_user
   end
 
@@ -12,7 +12,7 @@ class Admin::UsersController < AdminController
     unless @user.authenticate(params[:user][:password_old])
       @user.errors.add(:password_old, 'password is wrong')
       flash.now[:alert] = 'Could not save changes.'
-      render :edit and return
+      render :profile and return
     end
 
     @user.email = params[:user][:email]
@@ -22,8 +22,13 @@ class Admin::UsersController < AdminController
       @user.password_confirmation = params[:user][:password_confirmation]
     end
 
-    flash.now[:alert] = 'Could not save changes.' unless @user.save
+    if @user.save
+      flash.now[:notice] = 'Saved changes.'
+    else
+      flash.now[:alert] = 'Could not save changes.'
+    end
+
     @user.refresh_api_key! if params[:refresh_api_key]
-    render :edit
+    render :profile
   end
 end

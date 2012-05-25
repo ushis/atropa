@@ -14,8 +14,11 @@ Atropa::Application.routes.draw do
   get 'admin(/videos/:page)' => 'admin/videos#index', as: :admin
 
   namespace :admin do
-    resources :videos
-    resources :users
+    resources :videos, except: [:new, :show]
+
+    get 'profile' => 'users#profile'
+    put 'profile' => 'users#update'
+
     get    'login' => 'login#form'
     post   'login' => 'login#login'
     delete 'login' => 'login#logout'
