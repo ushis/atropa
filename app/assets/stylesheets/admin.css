@@ -475,4 +475,5 @@ ul.ui-autocomplete li a.ui-state-focus {
 
 #aether input[type=submit] {
   float: right;
+  margin-left: 10px;
 }

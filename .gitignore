@@ -19,3 +19,6 @@
 
 # Vim
 *.swp
+
+# Ignore security stuff
+/config/initializers/secret_token.rb

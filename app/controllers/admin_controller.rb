@@ -15,6 +15,7 @@ class AdminController < ActionController::Base
 
   private
   def current_user
-    @current_user ||= User.find_by_login_hash(session[:login_hash]) if session[:login_hash]
+    login_hash = session[:login_hash] || cookies.signed[:remember_me]
+    @current_user ||= User.find_by_login_hash(login_hash) if login_hash
   end
 end

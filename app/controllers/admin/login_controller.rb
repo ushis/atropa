@@ -21,6 +21,11 @@ class Admin::LoginController < AdminController
       flash.now[:alert] = 'Something went wrong. Let\'s try it again.'
     else
       session[:login_hash] = user.login_hash
+
+      if params[:remember_me]
+        cookies.signed[:remember_me] = { value: user.login_hash, expires: 2.weeks.from_now }
+      end
+
       redirect_to admin_url and return
     end
 
@@ -30,6 +35,7 @@ class Admin::LoginController < AdminController
   def logout
     @username = current_user.username
     session[:login_hash] = nil
+    cookies.delete :remember_me
     render :form
   end
 end
