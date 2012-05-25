@@ -73,7 +73,7 @@ class PublicController < ActionController::Base
   end
 
   def load_tags
-    @tags = Tag.order(:tag).all
+    @tags = Tag.not_orphaned.order(:tag).all
   end
 
   def not_found
