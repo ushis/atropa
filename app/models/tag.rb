@@ -26,8 +26,9 @@ class Tag < ActiveRecord::Base
     ret + tags.collect { |tag| self.new(tag: tag) }
   end
 
-  def self.not_orphaned
-    self.where('tags.id in (select tv.tag_id from tags_videos tv)')
+  def self.most_popular(limit = 20)
+    self.where('tags.id in (select tv.tag_id from tags_videos tv group by ' +
+               'tv.tag_id order by count(tv.tag_id) DESC LIMIT ?)', limit)
   end
 
   def to_s
