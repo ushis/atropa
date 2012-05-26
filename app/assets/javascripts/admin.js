@@ -25,15 +25,15 @@
 
   $.fn.magicRemoveButton = function() {
     return this.each(function() {
-      var el = $(this);
-
-      el.append(
-        $('<span>').addClass('rm').text('×').click(function() {
-          el.fadeOut(400, function() {
-            $(this).remove();
-          });
-        })
-      );
+      (function(el) {
+        el.append(
+          $('<span>').addClass('rm').text('×').click(function() {
+            el.fadeOut(400, function() {
+              $(this).remove();
+            });
+          })
+        );
+      })($(this));
     });
   }
 
