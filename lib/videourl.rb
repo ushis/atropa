@@ -5,12 +5,21 @@ module VideoUrl
   end
 
   class InvalidUrlError < Error
+    def initialize(url)
+      super("Invalid url: #{url}")
+    end
   end
 
   class RequestError < Error
   end
 
   class InvalidResponseError < Error
+  end
+
+  class EmbedNotAllowedError < Error
+    def initialize
+      super('It is not allowed to embed this video')
+    end
   end
 
   def self.video_info(url)
@@ -22,7 +31,7 @@ module VideoUrl
       end
     end
 
-    raise InvalidUrlError, "Invalid url: #{url}"
+    raise InvalidUrlError, url
   end
 
   def self.video_url(provider, id)
@@ -41,7 +50,7 @@ module VideoUrl
 
   def self.request(url, pattern, api)
     if (matches = pattern.match(url)).nil?
-      raise InvalidUrlError, 'Invalid url'
+      raise InvalidUrlError, url
     end
 
     begin
@@ -54,6 +63,7 @@ end
 
 
 module VideoUrl::Vimeo
+  include VideoUrl
 
   PATTERN = /\Ahttp(?:s)?:\/\/vimeo\.com\/([0-9]+)\z/
   API = 'https://vimeo.com/api/v2/video/%{id}.json'
@@ -61,14 +71,20 @@ module VideoUrl::Vimeo
   SRC = 'https://player.vimeo.com/video/%{id}?title=0&amp;byline=0&amp;portrait=0'
 
   def self.info(url)
-    data = VideoUrl.request(url, PATTERN, API)[0]
+    data = VideoUrl.request(url, PATTERN, API).fetch(0)
 
-    {vid:      data['id'],
-     title:    data['title'],
-     width:    data['width'],
-     height:   data['height'],
-     preview:  data['thumbnail_large'],
-     provider: 'vimeo'}
+    if data['embed_privacy'] != 'anywhere'
+      raise EmbedNotAllowdError
+    end
+
+    {
+      vid:      data.fetch('id'),
+      title:    data.fetch('title'),
+      width:    data.fetch('width'),
+      height:   data.fetch('height'),
+      preview:  data.fetch('thumbnail_large'),
+      provider: 'vimeo'
+    }
   rescue KeyError
     raise InvalidResponseError, 'Vimeo responded with invalid data'
   end
@@ -76,6 +92,7 @@ end
 
 
 module VideoUrl::Youtube
+  include VideoUrl
 
   PATTERN = /\Ahttp(?:s)?:\/\/(?:www\.)?youtube\.com[^ \n]*(?:[\?&]v=)([^ &\n]+)/
   API = 'https://gdata.youtube.com/feeds/api/videos/%{id}?v=2&alt=json'
@@ -83,15 +100,54 @@ module VideoUrl::Youtube
   SRC = 'https://www.youtube.com/embed/%{id}?rel=0'
 
   def self.info(url)
-    data = VideoUrl.request(url, PATTERN, API)['entry']
+    data = VideoUrl.request(url, PATTERN, API).fetch('entry')
 
-    {vid:      data['media$group']['yt$videoid']['$t'],
-     title:    data['title']['$t'],
-     width:    data['media$group']['media$thumbnail'][2]['width'],
-     height:   data['media$group']['media$thumbnail'][2]['height'],
-     preview:  data['media$group']['media$thumbnail'][2]['url'],
-     provider: 'youtube'}
+    data.fetch('yt$accessControl').each do |access|
+      if access['action'] == 'embed'
+        raise EmbedNotAllowdError if access['permission'] != 'allowed'
+        break
+      end
+    end
+
+    {
+      vid:      data.fetch('media$group').fetch('yt$videoid').fetch('$t'),
+      title:    data.fetch('title').fetch('$t'),
+      width:    data.fetch('media$group').fetch('media$thumbnail').fetch(2).fetch('width'),
+      height:   data.fetch('media$group').fetch('media$thumbnail').fetch(2).fetch('height'),
+      preview:  data.fetch('media$group').fetch('media$thumbnail').fetch(2).fetch('url'),
+      provider: 'youtube'
+    }
   rescue KeyError
     raise InvalidResponseError, 'Youtube responded with invalid data'
+  end
+end
+
+
+module VideoUrl::Dailymotion
+  include VideoUrl
+
+  PATTERN = /\Ahttp(?:s)?:\/\/www\.dailymotion\.com\/video\/([^_]+)/
+  API = 'https://api.dailymotion.com/video/%{id}?fields=' +
+        'id,thumbnail_large_url,title,allow_embed,aspect_ratio'
+  URL = 'https://www.dailymotion.com/video/%{id}'
+  SRC = 'https://www.dailymotion.com/embed/video/%{id}'
+
+  def self.info(url)
+    data = VideoUrl.request(url, PATTERN, API)
+
+    unless data.fetch('allow_embed')
+      raise EmbedNotAllowedError
+    end
+
+    {
+      vid:      data.fetch('id'),
+      title:    data.fetch('title'),
+      width:    data.fetch('aspect_ratio').to_f * 360,
+      height:   360,
+      preview:  data.fetch('thumbnail_large_url'),
+      provider: 'dailymotion'
+    }
+  rescue KeyError
+    raise InvalidResponseError, 'Dailymotion responded with invalid data'
   end
 end
