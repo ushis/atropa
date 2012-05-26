@@ -11,7 +11,6 @@ end
 
 gem 'jquery-rails'
 gem 'bcrypt-ruby', '~> 3.0.0'
-gem 'uuidtools'
 
 # To use debugger
 # gem 'ruby-debug19', :require => 'ruby-debug'

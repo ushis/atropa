@@ -1,5 +1,5 @@
 require 'digest/sha1'
-require 'uuidtools'
+require 'securerandom'
 
 class User < ActiveRecord::Base
   attr_accessible :username, :email, :password, :password_confirmation
@@ -31,6 +31,6 @@ class User < ActiveRecord::Base
 
   private
   def unique_hash
-    Digest::SHA1.hexdigest UUIDTools::UUID.random_create.to_s
+    Digest::SHA1.hexdigest SecureRandom.uuid
   end
 end
