@@ -1,3 +1,5 @@
+require 'videourl'
+
 class Video < ActiveRecord::Base
   attr_accessible :vid, :title, :slug, :width, :height, :preview, :provider
 
@@ -8,6 +10,10 @@ class Video < ActiveRecord::Base
   has_and_belongs_to_many :tags
 
   before_create :add_slug
+
+  def self.new_from_url(url)
+    self.new VideoUrl.video_info(url)
+  end
 
   def self.paginate(page, options = {})
     opts = {per_page: 10, order: 'created_at DESC'}.update(options)
@@ -29,15 +35,23 @@ class Video < ActiveRecord::Base
      {total: total, current: page}]
   end
 
+  def url
+    VideoUrl.video_url provider, vid
+  end
+
+  def source
+    VideoUrl.video_src provider, vid
+  end
+
   def add_slug
-    self.slug = self.title.parameterize
+    @slug = title.parameterize
   end
 
   def api_friendly
     {id: id,
-     user: user.username,
      title: title,
      preview: preview,
+     user: user.username,
      tags: tags.collect { |tag| tag.tag }}
   end
 end

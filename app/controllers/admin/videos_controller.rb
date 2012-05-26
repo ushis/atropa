@@ -1,7 +1,4 @@
-require 'videourl'
-
 class Admin::VideosController < AdminController
-
   before_filter lambda { @body_class = 'form' }, only: [:edit, :update]
 
   def index
@@ -11,7 +8,7 @@ class Admin::VideosController < AdminController
   end
 
   def create
-    video = Video.new VideoUrl.info(params[:url])
+    video = Video.new_from_url(params[:url])
   rescue => e
     flash[:alert] = e.message
     go_back and return

@@ -4,13 +4,13 @@
       <%= video_preview video, 640 %>
     </div>
     <div class="player">
-      <%= link_to '▶', video_iframe_src(video), class: 'play' %>
+      <%= link_to '▶', video.source, class: 'play' %>
     </div>
   </div>
   <footer>
     <ul class="links">
       <li>
-        <%= video_link video, '↗' %>
+        <%= link_to video.url, '↗' %>
       </li>
       <li>
         <%= link_to '#', video_path(id: video, slug: video.slug) %>

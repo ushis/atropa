@@ -10,7 +10,7 @@
       <%= @video.width %>×<%= @video.height %>
     </li>
     <li>
-      <%= video_link @video %>
+      <%= link_to @video.url %>
     </li>
     <li>
       <%= link_to '↗', video_path(id: @video, slug: @video.slug) %>

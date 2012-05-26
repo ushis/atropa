@@ -1,5 +1,3 @@
-require 'videourl'
-
 class Api::VideosController < ApiController
   def index
     videos = Video.includes(:tags, :user).where(user_id: current_user).all
@@ -15,7 +13,7 @@ class Api::VideosController < ApiController
   end
 
   def create
-    video = Video.new VideoUrl.info(signed_params[:url])
+    video = Video.new_from_url signed_params[:url]
   rescue => e
     respond({error: e.message}, 600) and return
   else
