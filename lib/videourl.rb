@@ -14,8 +14,6 @@ module VideoUrl
   end
 
   def self.video_info(url)
-    error = nil
-
     self.constants.each do |provider|
       begin
         return self.const_get(provider).info(url)
