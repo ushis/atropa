@@ -27,13 +27,13 @@
                 <% @tags.each_slice(@tags.length.fdiv(4).ceil) do |tags| %>
                   <ul class="tags">
                     <% tags.each do |tag| %>
-                      <li class="<%= 'cur' if tag == @tag %>">
+                      <li<%= ' class="cur"'.html_safe if tag == @tag %>>
                         <%= link_to tag.tag, tag_path(id: tag, slug: tag.slug) %>
                       </li>
                     <% end %>
-                 </ul>
-               <% end %>
-             </div>
+                  </ul>
+                <% end %>
+              </div>
             </div>
           </li>
           <li>

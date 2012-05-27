@@ -329,9 +329,10 @@ ul.video-list > li {
   border-radius: 2px;
 }
 
-ul.video-list li:hover {
+ul.video-list > li:hover {
   background-color: #fff;
   border-color: #c0c0c0;
+  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.1)
 }
 
 ul.video-list li div.preview {
@@ -340,29 +341,48 @@ ul.video-list li div.preview {
   height: 78px;
   overflow: hidden;
   background-color: #000;
+  border-right: 1px solid #d0d0d0;
   border-radius: 2px 0 0 2px;
   opacity: .9;
 }
 
 ul.video-list li:hover div.preview {
+  border-color: #c0c0c0;
   opacity: 1;
 }
 
 ul.video-list li div.description {
-  margin-left: 160px;
-  padding: 2px 0;
+  margin-left: 141px;
 }
 
 ul.video-list li h2 {
-  font-size: 16px;
+  margin-bottom: 1px;
+  padding-left: 20px;
+  font-size: 14px;
   line-height: 30px;
+  background-color: #e0e0e0;
+  border-bottom: 1px solid #d0d0d0;
+}
+
+ul.video-list li:hover h2 {
+  background-color: #d9d9d9;
+  border-color: #c0c0c0;
 }
 
 ul.video-list li h2 input[type=submit] {
   float: right;
   font-size: 14px;
-  line-height: 28px;
+  line-height: 30px;
   margin-right: 12px;
+}
+
+ul.video-list li h2 a:hover,
+ul.video-list li h2 input[type=submit]:hover {
+  color: #555;
+}
+
+ul.video-list li div.description > ul {
+  margin-left: 20px;
 }
 
 ul.video-list li ul.tags li:nth-child(n+2):before {
