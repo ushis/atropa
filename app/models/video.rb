@@ -11,7 +11,7 @@ class Video < ActiveRecord::Base
   belongs_to :user
   has_and_belongs_to_many :tags
 
-  before_save :update_slug
+  before_save lambda { update_slug if title_changed? }
 
   def self.new_from_url(url)
     self.new VideoUrl.video_info(url)

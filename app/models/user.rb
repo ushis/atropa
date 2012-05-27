@@ -1,4 +1,5 @@
 require 'digest/sha1'
+require 'digest/md5'
 require 'securerandom'
 
 class User < ActiveRecord::Base
@@ -10,6 +11,12 @@ class User < ActiveRecord::Base
   validates :login_hash, uniqueness: true, allow_nil: true
 
   has_many :videos
+
+  before_save lambda { update_gravatar_id if email_changed? }
+
+  def update_gravatar_id
+    self.gravatar_id = Digest::MD5.hexdigest email.strip.downcase
+  end
 
   def refresh_login_hash!
     self.login_hash = unique_hash

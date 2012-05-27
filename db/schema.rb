@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 2) do
+ActiveRecord::Schema.define(:version => 3) do
 
   create_table "tags", :force => true do |t|
     t.string "tag",  :null => false
@@ -30,6 +30,7 @@ ActiveRecord::Schema.define(:version => 2) do
     t.string   "login_hash"
     t.datetime "created_at",      :null => false
     t.string   "api_key"
+    t.string   "gravatar_id"
   end
 
   create_table "videos", :force => true do |t|

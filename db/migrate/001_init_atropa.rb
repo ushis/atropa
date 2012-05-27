@@ -30,8 +30,6 @@ class InitAtropa < ActiveRecord::Migration
       t.string :login_hash,      null: true
       t.timestamp :created_at,   null: false
     end
-
-    User.new(username: 'ushi', password: 'ushi', email: 'ushi@example.com').save
   end
 
   def down

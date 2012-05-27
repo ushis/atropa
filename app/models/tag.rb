@@ -9,7 +9,7 @@ class Tag < ActiveRecord::Base
 
   has_and_belongs_to_many :videos
 
-  before_save :update_slug
+  before_save lambda { update_slug if tag_changed? }
 
   def self.from_s(str, delimiter = /,\s*/)
     tags = Set.new

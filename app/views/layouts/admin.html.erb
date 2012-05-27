@@ -29,7 +29,7 @@
             <nav>
               <ul>
                 <li class="avatar">
-                  <%= gravatar_tag current_user.email, 50 %>
+                  <%= gravatar_tag current_user.gravatar_id, 50 %>
                 </li>
                 <li>
                   <%= link_to 'Profile', admin_profile_path %>

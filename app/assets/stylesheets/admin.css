@@ -356,10 +356,10 @@ ul.video-list li div.description {
 }
 
 ul.video-list li h2 {
-  margin-bottom: 1px;
+  margin-bottom: 3px;
   padding-left: 20px;
   font-size: 14px;
-  line-height: 30px;
+  line-height: 28px;
   background-color: #e0e0e0;
   border-bottom: 1px solid #d0d0d0;
 }
@@ -372,7 +372,7 @@ ul.video-list li:hover h2 {
 ul.video-list li h2 input[type=submit] {
   float: right;
   font-size: 14px;
-  line-height: 30px;
+  line-height: 28px;
   margin-right: 12px;
 }
 

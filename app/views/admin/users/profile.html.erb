@@ -1,6 +1,6 @@
 <%= form_for @user, url: admin_profile_path, html: {id: 'user-form'} do |f| %>
   <div class="avatar">
-    <%= link_to gravatar_tag(@user.email, 74), 'https://secure.gravatar.com/' %>
+    <%= link_to gravatar_tag(@user.gravatar_id, 74), 'https://secure.gravatar.com/' %>
   </div>
   <h1>
     <%= @user.username %>

@@ -16,11 +16,8 @@ module ApplicationHelper
     end
   end
 
-  def gravatar_tag(email, size = 50)
-    size = size.to_s
-    uri = 'https://secure.gravatar.com/avatar/'
-    uri << Digest::MD5.hexdigest(email.strip.downcase)
-    uri << "?d=mm&s=#{size}"
+  def gravatar_tag(id, size = 50)
+    uri = "https://secure.gravatar.com/avatar/#{id}?d=mm&s=#{size.to_s}"
     image_tag uri, alt: 'Gravatar', width: size, height: size
   end
 
