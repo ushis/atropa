@@ -7,7 +7,7 @@ class Tag < ActiveRecord::Base
 
   has_and_belongs_to_many :videos
 
-  before_create :add_slug
+  before_save :update_slug
 
   def self.from_s(str, delimiter = /,\s*/)
     tags = Set.new
@@ -41,7 +41,7 @@ class Tag < ActiveRecord::Base
     json
   end
 
-  def add_slug
+  def update_slug
     self.slug = tag.parameterize
   end
 end

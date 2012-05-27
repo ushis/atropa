@@ -9,7 +9,7 @@ class Video < ActiveRecord::Base
   belongs_to :user
   has_and_belongs_to_many :tags
 
-  before_create :add_slug
+  before_save :update_slug
 
   def self.new_from_url(url)
     self.new VideoUrl.video_info(url)
@@ -50,7 +50,7 @@ class Video < ActiveRecord::Base
     json
   end
 
-  def add_slug
+  def update_slug
     self.slug = title.parameterize
   end
 end

@@ -34,5 +34,14 @@ Atropa::Application.routes.draw do
         get '/destroy' => 'videos#destroy'
       end
     end
+
+    resources :tags, except: [:new, :edit] do
+      get '/create' => 'tags#create', on: :collection
+
+      member do
+        get '/update'  => 'tags#update'
+        get '/destroy' => 'tags#destroy'
+      end
+    end
   end
 end

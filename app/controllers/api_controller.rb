@@ -3,8 +3,8 @@ class ApiController < ActionController::Base
 
   before_filter :authenticate
 
-  def respond(obj, status = 200)
-    respond_with(obj, status: status, callback: params[:callback], location: nil)
+  def respond_with(obj, status = 200)
+    super(obj, status: status, callback: params[:callback], location: nil)
   end
 
   def authenticate

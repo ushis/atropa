@@ -1,41 +1,38 @@
 class Api::VideosController < ApiController
   def index
-    videos = Video.includes(:tags, :user).where(user_id: current_user).all
-    respond(videos)
+    respond_with(Video.includes(:tags, :user).all)
   end
 
   def show
-    video = Video.includes(:user, :tags).find(signed_params[:id])
+    respond_with(Video.includes(:user, :tags).find(signed_params[:id]))
   rescue
-    respond({error: 'Video not found.'}, 404) and return
-  else
-    respond(video)
+    respond_with({error: 'Video not found.'}, 404)
   end
 
   def create
     video = Video.new_from_url signed_params[:url]
   rescue => e
-    respond({error: e.message}, 600) and return
+    respond_with({error: e.message}, 600) and return
   else
     video.user = current_user
     video.tags = Tag.from_s(signed_params[:tags]) if signed_params[:tags]
 
     if video.save
-      respond(video)
+      respond_with(video)
     else
-      respond({error: 'Could not save video'}, 601)
+      respond_with({error: 'Could not save video'}, 601)
     end
   end
 
   def update
     video = Video.includes(:user).find(signed_params[:id])
   rescue
-    respond({error: 'Video not found'}, 404) and return
+    respond_with({error: 'Video not found'}, 404) and return
   else
     video.tags = Tag.from_s signed_params[:tags] if signed_params[:tags]
 
     if video.save
-      respond(video)
+      respond_with(video)
     else
       resond({error: 'Could not save video'}, 601)
     end
@@ -44,12 +41,12 @@ class Api::VideosController < ApiController
   def destroy
     video = Video.find(signed_params[:id])
   rescue
-    respond({error: 'Video not found.'}, 404) and return
+    respond_with({error: 'Video not found.'}, 404) and return
   else
     if video.destroy
-      respond({message: "Deleted video: #{video.title}"})
+      respond_with({message: "Deleted video: #{video.title}"})
     else
-      respond({error: 'Could not delete video.'}, 601)
+      respond_with({error: 'Could not delete video.'}, 601)
     end
   end
 end
