@@ -1,6 +1,8 @@
 require 'set'
 
 class Tag < ActiveRecord::Base
+  include Rails.application.routes.url_helpers
+
   attr_accessible :tag, :slug
 
   validates :tag, presence: true
@@ -31,12 +33,16 @@ class Tag < ActiveRecord::Base
                'tv.tag_id order by count(tv.tag_id) DESC LIMIT ?)', limit)
   end
 
+  def url
+    tag_url id: id, slug: slug
+  end
+
   def to_s
     tag
   end
 
   def as_json(options = {})
-    json = super(only: [:id, :tag])
+    json = super(only: [:id, :tag], methods: [:url])
     json[:videos] = videos if association(:videos).loaded?
     json
   end

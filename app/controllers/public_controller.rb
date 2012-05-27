@@ -58,10 +58,11 @@ class PublicController < ActionController::Base
   end
 
   def feed
-    @videos = Video.includes(:user).order('created_at DESC').limit(20).all
+    @videos = Video.includes(:user, :tags).order('created_at DESC').limit(20).all
 
     respond_to do |format|
       format.atom { render layout: false }
+      format.json { render :json => @videos }
     end
   end
 

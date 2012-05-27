@@ -1,6 +1,8 @@
 require 'videourl'
 
 class Video < ActiveRecord::Base
+  include Rails.application.routes.url_helpers
+
   attr_accessible :vid, :title, :slug, :width, :height, :preview, :provider
 
   validates :title, presence: true
@@ -36,6 +38,10 @@ class Video < ActiveRecord::Base
   end
 
   def url
+    video_url id: id, slug: slug
+  end
+
+  def link
     VideoUrl.video_url provider, vid
   end
 
@@ -44,7 +50,7 @@ class Video < ActiveRecord::Base
   end
 
   def as_json(options = {})
-    json = super(only: [:id, :title, :preview, :created_at])
+    json = super(only: [:id, :title, :preview, :created_at], methods: [:url, :link, :source])
     json[:user] = user if association(:user).loaded?
     json[:tags] = tags if association(:tags).loaded?
     json

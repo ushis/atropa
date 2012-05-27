@@ -34,4 +34,7 @@ Atropa::Application.configure do
 
   # Expands the lines which load the assets
   config.assets.debug = true
+
+  # Set the default host to localhost in development mode
+  Rails.application.routes.default_url_options[:host] = '0.0.0.0'
 end
