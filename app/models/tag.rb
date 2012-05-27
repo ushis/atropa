@@ -32,10 +32,16 @@ class Tag < ActiveRecord::Base
   end
 
   def to_s
-    self.tag
+    tag
+  end
+
+  def as_json(options = {})
+    json = super(only: [:id, :tag])
+    json[:videos] = videos if association(:videos).loaded?
+    json
   end
 
   def add_slug
-    self.slug = self.tag.parameterize
+    self.slug = tag.parameterize
   end
 end

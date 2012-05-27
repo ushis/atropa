@@ -29,6 +29,12 @@ class User < ActiveRecord::Base
     self.username
   end
 
+  def as_json(options = {})
+    json = super(only: [:id, :username])
+    json[:videos] = videos if association(:videos).loaded?
+    json
+  end
+
   private
   def unique_hash
     Digest::SHA1.hexdigest SecureRandom.uuid

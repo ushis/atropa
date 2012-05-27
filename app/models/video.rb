@@ -43,15 +43,14 @@ class Video < ActiveRecord::Base
     VideoUrl.video_src provider, vid
   end
 
-  def add_slug
-    @slug = title.parameterize
+  def as_json(options = {})
+    json = super(only: [:id, :title, :preview, :created_at])
+    json[:user] = user if association(:user).loaded?
+    json[:tags] = tags if association(:tags).loaded?
+    json
   end
 
-  def api_friendly
-    {id: id,
-     title: title,
-     preview: preview,
-     user: user.username,
-     tags: tags.collect { |tag| tag.tag }}
+  def add_slug
+    self.slug = title.parameterize
   end
 end
