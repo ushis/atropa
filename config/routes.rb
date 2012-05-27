@@ -26,6 +26,8 @@ Atropa::Application.routes.draw do
 
   # Api routes
   namespace :api do
+    resources :users, only: :show
+
     resources :videos, except: [:new, :edit] do
       get '/create'  => 'videos#create', on: :collection
 
