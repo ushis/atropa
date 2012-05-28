@@ -342,7 +342,7 @@ ul.video-list li div.preview {
   overflow: hidden;
   background-color: #000;
   border-right: 1px solid #d0d0d0;
-  border-radius: 2px 0 0 2px;
+  border-radius: 1px 0 0 1px;
   opacity: .9;
 }
 
@@ -357,28 +357,35 @@ ul.video-list li div.description {
 
 ul.video-list li h2 {
   margin-bottom: 3px;
+}
+
+ul.video-list li h2 a,
+ul.video-list li h2 input[type=submit] {
+  display: block;
   padding-left: 20px;
   font-size: 14px;
   line-height: 28px;
   background-color: #e0e0e0;
   border-bottom: 1px solid #d0d0d0;
-}
-
-ul.video-list li:hover h2 {
-  background-color: #d9d9d9;
-  border-color: #c0c0c0;
+  border-radius: 0 1px 0 0;
 }
 
 ul.video-list li h2 input[type=submit] {
   float: right;
-  font-size: 14px;
-  line-height: 28px;
-  margin-right: 12px;
+  padding: 0 12px;
+  border-left: 1px solid #d0d0d0;
+}
+
+ul.video-list li:hover h2 a,
+ul.video-list li:hover h2 input[type=submit] {
+  background-color: #d9d9d9;
+  border-color: #c0c0c0;
 }
 
 ul.video-list li h2 a:hover,
 ul.video-list li h2 input[type=submit]:hover {
-  color: #555;
+  color: #000;
+  background-color: #e3e3e3;
 }
 
 ul.video-list li div.description > ul {

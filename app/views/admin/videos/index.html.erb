@@ -14,9 +14,6 @@
             <%= time_ago_in_words video.created_at %> ago by <%= video.user.username %>
           </li>
           <li>
-            <%= video.width %>×<%= video.height %>
-          </li>
-          <li>
             <%= link_to video.provider, video.link %>
           </li>
         </ul>
