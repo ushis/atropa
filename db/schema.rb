@@ -11,12 +11,14 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 3) do
+ActiveRecord::Schema.define(:version => 4) do
 
   create_table "tags", :force => true do |t|
     t.string "tag",  :null => false
     t.string "slug", :null => false
   end
+
+  add_index "tags", ["tag"], :name => "index_tags_on_tag", :unique => true
 
   create_table "tags_videos", :id => false, :force => true do |t|
     t.integer "tag_id",   :null => false
@@ -33,6 +35,10 @@ ActiveRecord::Schema.define(:version => 3) do
     t.string   "gravatar_id"
   end
 
+  add_index "users", ["email"], :name => "index_users_on_email", :unique => true
+  add_index "users", ["login_hash"], :name => "index_users_on_login_hash", :unique => true
+  add_index "users", ["username"], :name => "index_users_on_username", :unique => true
+
   create_table "videos", :force => true do |t|
     t.integer  "user_id",    :null => false
     t.string   "vid",        :null => false
@@ -45,5 +51,7 @@ ActiveRecord::Schema.define(:version => 3) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
+
+  add_index "videos", ["vid", "provider"], :name => "index_videos_on_vid_and_provider", :unique => true
 
 end

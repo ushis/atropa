@@ -7,7 +7,9 @@ class User < ActiveRecord::Base
 
   has_secure_password
 
-  validates :password, presence: true, on: :create
+  validates :password,   presence: true,   on: :create
+  validates :username,   uniqueness: true
+  validates :email,      uniqueness: true
   validates :login_hash, uniqueness: true, allow_nil: true
 
   has_many :videos

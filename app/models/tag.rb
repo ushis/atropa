@@ -5,7 +5,7 @@ class Tag < ActiveRecord::Base
 
   attr_accessible :tag, :slug
 
-  validates :tag, presence: true
+  validates :tag, presence: true, uniqueness: true
 
   has_and_belongs_to_many :videos
 

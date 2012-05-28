@@ -6,7 +6,8 @@ class Video < ActiveRecord::Base
   attr_accessible :vid, :title, :slug, :width, :height, :preview, :provider
 
   validates :title, presence: true
-  validates :vid, presence: true
+  validates :vid,   presence: true
+  validates_uniqueness_of :vid, scope: :provider
 
   belongs_to :user
   has_and_belongs_to_many :tags
