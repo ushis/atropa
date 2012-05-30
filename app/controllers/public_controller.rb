@@ -34,13 +34,11 @@ class PublicController < ActionController::Base
   end
 
   def video
-    video = Video.includes(:tags).find params[:id]
+    @video = Video.includes(:tags).find params[:id]
   rescue
     not_found and return
   else
-    @title = video.title
-    @videos = [video]
-    render :index
+    @title = @video.title
   end
 
   def feed

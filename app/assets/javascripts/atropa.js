@@ -7,17 +7,21 @@
 
   $.fn.magicSearch = function(url, field) {
     return this.each(function() {
-      (function(el) {
-        el.blur(function() {
-          el.val().trim().length === 0 && el.addClass('empty');
-        }).focus(function() {
-          el.removeClass('empty');
-        });
-      })($(this).find('input[name=' + field + ']'));
+      var el = $(this).find('input[name=' + field + ']');
+
+      el.blur(function() {
+        el.val().trim().length === 0 && el.addClass('empty');
+      }).focus(function() {
+        el.removeClass('empty');
+      });
 
       $(this).submit(function() {
         var val = el.val().trim();
-        val.length > 0 && window.location = url + '/' + val;
+
+        if (val.length > 0) {
+          window.location = url + '/' + val;
+        }
+
         return false;
       });
     });
