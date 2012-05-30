@@ -5,13 +5,13 @@ class PublicController < ActionController::Base
 
   def index
     @videos = Video.includes(:tags).most_recent(params[:page], 6)
-    @title = "videos : page #{params[:page]}"
+    @title = "videos : page #{@videos.current_page}"
   end
 
   def search
     @q = params[:q]
     @videos = Video.includes(:tags).search(@q, params[:page], 6)
-    @title = "#{@q} : page #{params[:page]}"
+    @title = "#@q : page #{@videos.current_page}"
     render :index
   end
 
@@ -29,7 +29,7 @@ class PublicController < ActionController::Base
     not_found and return
   else
     @videos = @tag.most_recent_videos(params[:page], 6).includes(:tags)
-    @title = "#@tag : page #{params[:page]}"
+    @title = "#{@tag.tag} : page #{@videos.current_page}"
     render :index
   end
 
