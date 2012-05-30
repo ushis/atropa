@@ -1,26 +1,22 @@
 class PublicController < ActionController::Base
   protect_from_forgery
 
-  before_filter lambda { load_tags unless request.xhr? }
+  before_filter lambda { @tags = Tag.most_popular(32).order(:tag) }
 
   def index
-    @videos, @pagination = paginate_videos
-    @pagination[:url] = {action: :index}
-    @title = 'videos : page ' + @pagination[:current].to_s
+    @videos = Video.includes(:tags).most_recent(params[:page], 6)
+    @title = "videos : page #{params[:page]}"
   end
 
   def search
-    redirect_to action: :index and return if ! params[:q] || params[:q].blank?
-
     @q = params[:q]
-    @videos, @pagination = paginate_videos(conditions: {'videos.title like ?' => '%' + @q + '%'})
-    @pagination[:url] = {action: :search}
-    @title = @q + ' : page ' + @pagination[:current].to_s
+    @videos = Video.includes(:tags).search(@q, params[:page], 6)
+    @title = "#{@q} : page #{params[:page]}"
     render :index
   end
 
   def redirect_search
-    if params[:q] && !params[:q].blank?
+    if params[:q] && ! params[:q].blank?
       redirect_to action: :search, q: params[:q]
     else
       redirect_to action: :index
@@ -28,22 +24,12 @@ class PublicController < ActionController::Base
   end
 
   def tag
-    @tag = Tag.includes(videos: :tags).order('videos.created_at DESC').find params[:id]
+    @tag = Tag.find params[:id]
   rescue
     not_found and return
   else
-    total = @tag.videos.length.fdiv(6).ceil
-    page = params[:page].to_i
-
-    if page > total
-      page = total
-    elsif page < 1
-      page = 1
-    end
-
-    @videos = @tag.videos[(page - 1) * 6, 6]
-    @pagination = {total: total, current: page, url: {action: :tag, id: @tag, slug: @tag.slug}}
-    @title = @tag.tag + ' : page ' + page.to_s
+    @videos = @tag.most_recent_videos(params[:page], 6).includes(:tags)
+    @title = "#@tag : page #{params[:page]}"
     render :index
   end
 
@@ -58,23 +44,12 @@ class PublicController < ActionController::Base
   end
 
   def feed
-    @videos = Video.includes(:user, :tags).order('created_at DESC').limit(20).all
+    @videos = Video.includes(:user, :tags).most_recent(1, 20)
 
     respond_to do |format|
       format.atom { render layout: false }
       format.json { render :json => @videos }
     end
-  end
-
-  private
-  def paginate_videos(opts = {})
-    options = {includes: [:tags], per_page: 6}
-    options.update(opts)
-    Video.paginate(params[:page].to_i, options)
-  end
-
-  def load_tags
-    @tags = Tag.most_popular(32).order(:tag).all
   end
 
   def not_found

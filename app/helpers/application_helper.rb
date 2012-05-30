@@ -1,4 +1,4 @@
-require 'digest/md5'
+require 'atropa_page_links'
 
 module ApplicationHelper
 
@@ -21,25 +21,7 @@ module ApplicationHelper
     image_tag uri, alt: 'Gravatar', width: size, height: size
   end
 
-  def pagination_link(txt, url, page)
-    url[:page] = page
-    content_tag 'li', link_to(txt, url)
-  end
-
-  def pagination_current(page)
-    content_tag 'li', content_tag('span', page)
-  end
-
-  def pagination_links(info)
-    return nil if info[:total] < 2
-
-    links = info[:current] > 1 ? pagination_link('<', info[:url], info[:current] - 1) : ''
-
-    (1..info[:total]).each do |i|
-      links << (info[:current] != i ? pagination_link(i, info[:url], i) : pagination_current(i))
-    end
-
-    links << pagination_link('>', info[:url], info[:current] + 1) if info[:current] < info[:total]
-    content_tag 'ul', links.html_safe, class: 'pagination'
+  def paginate(collection)
+    will_paginate collection, renderer: AtropaPageLinks::Renderer
   end
 end

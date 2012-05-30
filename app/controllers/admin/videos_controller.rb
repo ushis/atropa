@@ -3,8 +3,7 @@ class Admin::VideosController < AdminController
 
   def index
     @title = 'Videos'
-    @videos, @pagination = Video.paginate(params[:page].to_i, includes: [:tags, :user])
-    @pagination[:url] = {action: :index}
+    @videos = Video.includes(:tags, :user).most_recent(params[:page], 20)
   end
 
   def create
@@ -57,6 +56,6 @@ class Admin::VideosController < AdminController
     Video.includes(:tags, :user).find(id)
   rescue
     flash[:alert] = 'Could not find video.'
-    go_back and return
+    go_back
   end
 end

@@ -19,18 +19,23 @@ class Tag < ActiveRecord::Base
       tags << tag unless tag.empty?
     end
 
-    tags.empty? ? [] : self.multi_find_or_initialize_by_tag(tags.to_a)
+    tags.empty? ? [] : multi_find_or_initialize_by_tag(tags.to_a)
   end
 
   def self.multi_find_or_initialize_by_tag(tags)
-    ret = self.where(tag: tags)
+    ret = where(tag: tags).all
     ret.each { |tag| tags.delete tag.tag }
     ret + tags.collect { |tag| self.new(tag: tag) }
   end
 
   def self.most_popular(limit = 20)
-    self.where('tags.id in (select tv.tag_id from tags_videos tv group by ' +
-               'tv.tag_id order by count(tv.tag_id) DESC LIMIT ?)', limit)
+    where('tags.id in (select tv.tag_id from tags_videos tv group by
+           tv.tag_id order by count(tv.tag_id) DESC LIMIT ?)', limit)
+  end
+
+  def most_recent_videos(page = 1, per_page = 6)
+    Video.most_recent(page, per_page).where('videos.id in (select tv.video_id from
+                                             tags_videos tv where tv.tag_id = ?)', id)
   end
 
   def url

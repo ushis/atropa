@@ -29,7 +29,7 @@
   <% end %>
 </ul>
 
-<%= pagination_links @pagination %>
+<%= paginate @videos %>
 
 <script>
   $('input.del').click(function() { return confirm('Really?'); });
