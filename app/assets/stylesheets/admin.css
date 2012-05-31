@@ -470,6 +470,10 @@ ul.pagination li span {
   color: #999;
 }
 
+ul.pagination li span.gap {
+  color: #111;
+}
+
 /* Autocomplete */
 ul.ui-autocomplete {
   position: absolute;
