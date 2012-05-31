@@ -1,7 +1,7 @@
 class PublicController < ActionController::Base
   protect_from_forgery
 
-  before_filter lambda { @tags = Tag.most_popular(32).order(:tag) }
+  before_filter :load_tags, except: [:redirect_search, :feed]
 
   def index
     @videos = Video.includes(:tags).most_recent(params[:page], 6)
@@ -48,6 +48,10 @@ class PublicController < ActionController::Base
       format.atom { render layout: false }
       format.json { render :json => @videos }
     end
+  end
+
+  def load_tags
+    @tags = Tag.most_popular(32).order(:tag)
   end
 
   def not_found

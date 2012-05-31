@@ -3,16 +3,16 @@ require 'atropa_page_links'
 module ApplicationHelper
 
   def flash_all
-    ret = ''
-    flash.each { |key, msg| ret << content_tag('div', msg, :class => 'flash ' + key.to_s) }
-    ret.html_safe
+    flash.inject('') do |html, item|
+      html << content_tag(:div, item[1], :class => "flash #{item[0].to_s}")
+    end.html_safe
   end
 
   def error_list(errors)
     return nil if errors.size == 0
 
-    content_tag 'ul', class: 'errors' do
-      errors.collect { |e| content_tag('li', e) }.join('').html_safe
+    content_tag :ul, class: 'errors' do
+      errors.inject('') { |html, e| html << content_tag(:li, e) }.html_safe
     end
   end
 

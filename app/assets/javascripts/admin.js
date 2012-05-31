@@ -13,13 +13,23 @@
     }, options);
 
     return this.each(function() {
-      username = $(this).find(settings.username);
+      var username = $(this).find(settings.username);
+      var password = $(this).find(settings.password);
 
-      if (username.length > 0 && username.val().trim().length === 0) {
-        username.focus();
+      if (username.val().trim().length === 0) {
+        if (localStorage.username) {
+          username.val(localStorage.username);
+          password.focus();
+        } else {
+          username.focus();
+        }
       } else {
-        $(this).find(settings.password).focus();
+        password.focus();
       }
+
+      $(this).submit(function() {
+        localStorage.username = username.val().trim();
+      });
     });
   };
 
