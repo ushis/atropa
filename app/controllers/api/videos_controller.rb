@@ -1,12 +1,10 @@
 class Api::VideosController < ApiController
   def index
-    respond_with(Video.includes(:tags, :user).all)
+    respond_with(Video.includes(:tags, :user))
   end
 
   def show
     respond_with(Video.includes(:user, :tags).find(signed_params[:id]))
-  rescue
-    respond_with('Video not found.', 404)
   end
 
   def create
@@ -26,9 +24,6 @@ class Api::VideosController < ApiController
 
   def update
     video = Video.includes(:user).find(signed_params[:id])
-  rescue
-    respond_with('Video not found', 404) and return
-  else
     video.tags = Tag.from_s signed_params[:tags] if signed_params[:tags]
 
     if video.save
@@ -40,13 +35,15 @@ class Api::VideosController < ApiController
 
   def destroy
     video = Video.find(signed_params[:id])
-  rescue
-    respond_with('Video not found.', 404) and return
-  else
+
     if video.destroy
       respond_with("Destroyed video: #{video.title}")
     else
       respond_with('Could not delete video.', 601)
     end
+  end
+
+  def not_found
+    respond_with('Video not found.', 404)
   end
 end

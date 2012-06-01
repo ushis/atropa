@@ -5,15 +5,10 @@ class Api::TagsController < ApiController
 
   def show
     respond_with(Tag.includes(:videos).find(signed_params[:id]))
-  rescue
-    respond_with('Tag not found.', 404)
   end
 
   def update
     tag = Tag.includes(:videos).find(signed_params[:id])
-  rescue
-    respond_with('Tag not found.', 404)
-  else
     tag.tag = signed_params[:tag]
 
     if tag.save
@@ -25,13 +20,15 @@ class Api::TagsController < ApiController
 
   def destroy
     tag = Tag.find(signed_params[:id])
-  rescue
-    respond_with('Tag not found.', 404) and return
-  else
+
     if tag.destroy
       respond_with("Destroyed tag: #{tag.tag}")
     else
       respond_with('Could not destroy tag.', 601)
     end
+  end
+
+  def not_found
+    respond_with('Tag not found.', 404)
   end
 end

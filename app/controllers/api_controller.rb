@@ -1,10 +1,16 @@
 class ApiController < ActionController::Base
+  rescue_from ActiveRecord::RecordNotFound, with: :not_found
+
   respond_to :json
 
   before_filter :authenticate
 
   def respond_with(obj, status = 200)
     super(obj, status: status, callback: params[:callback], location: nil)
+  end
+
+  def not_found
+    respond_with('Record not found.', 404)
   end
 
   def authenticate

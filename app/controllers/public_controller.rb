@@ -1,4 +1,6 @@
 class PublicController < ActionController::Base
+  rescue_from ActiveRecord::RecordNotFound, with: :not_found
+
   protect_from_forgery
 
   before_filter :load_tags, except: [:redirect_search, :feed]
@@ -25,9 +27,6 @@ class PublicController < ActionController::Base
 
   def tag
     @tag = Tag.find params[:id]
-  rescue
-    not_found and return
-  else
     @videos = @tag.most_recent_videos(params[:page], 6).includes(:tags)
     @title = "#{@tag.tag} : page #{@videos.current_page}"
     render :index
@@ -35,9 +34,6 @@ class PublicController < ActionController::Base
 
   def video
     @video = Video.includes(:tags).find params[:id]
-  rescue
-    not_found and return
-  else
     @title = @video.title
   end
 
