@@ -32,7 +32,7 @@ module AtropaPageLinks
     end
 
     def gap
-      content_tag(:li, content_tag(:span, '...', class: 'gap'))
+      content_tag(:li, content_tag(:span, '-', class: 'gap'))
     end
   end
 end

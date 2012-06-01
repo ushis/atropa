@@ -27,23 +27,7 @@ Atropa::Application.routes.draw do
   # Api routes
   namespace :api do
     resources :users, only: :show
-
-    resources :videos, except: [:new, :edit] do
-      get '/create'  => 'videos#create', on: :collection
-
-      member do
-        get '/update'  => 'videos#update'
-        get '/destroy' => 'videos#destroy'
-      end
-    end
-
-    resources :tags, except: [:new, :edit] do
-      get '/create' => 'tags#create', on: :collection
-
-      member do
-        get '/update'  => 'tags#update'
-        get '/destroy' => 'tags#destroy'
-      end
-    end
+    resources :videos, except: [:new, :edit]
+    resources :tags, except: [:new, :edit]
   end
 end

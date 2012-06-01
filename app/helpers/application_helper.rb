@@ -22,6 +22,6 @@ module ApplicationHelper
   end
 
   def paginate(collection)
-    will_paginate collection, renderer: AtropaPageLinks::Renderer
+    will_paginate collection, inner_window: 3, renderer: AtropaPageLinks::Renderer
   end
 end

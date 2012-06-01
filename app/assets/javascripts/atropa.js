@@ -17,11 +17,7 @@
 
       $(this).submit(function() {
         var val = el.val().trim();
-
-        if (val.length > 0) {
-          window.location = url + '/' + val;
-        }
-
+        val.length > 0 && window.location.replace(url + '/' + val);
         return false;
       });
     });
