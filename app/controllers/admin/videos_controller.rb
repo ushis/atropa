@@ -56,6 +56,6 @@ class Admin::VideosController < AdminController
     Video.includes(:tags, :user).find(id)
   rescue
     flash[:alert] = 'Could not find video.'
-    go_back
+    go_back and return nil
   end
 end
