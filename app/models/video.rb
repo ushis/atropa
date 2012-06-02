@@ -7,7 +7,7 @@ class Video < ActiveRecord::Base
 
   validates :title, presence: true
   validates :vid,   presence: true
-  validates_uniqueness_of :vid, scope: :provider
+  validates :vid,   uniqueness: {scope: :provider}
 
   belongs_to :user
   has_and_belongs_to_many :tags

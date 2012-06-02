@@ -28,6 +28,6 @@ Atropa::Application.routes.draw do
   namespace :api do
     resources :users, only: :show
     resources :videos, except: [:new, :edit]
-    resources :tags, except: [:new, :edit]
+    resources :tags, except: [:new, :create, :edit]
   end
 end
