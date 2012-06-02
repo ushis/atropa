@@ -27,13 +27,15 @@ class Video < ActiveRecord::Base
 
     return videos if q.blank?
 
-    condition = 'videos.title like :q'
+    finder = self
+    conditions = 'videos.title like :q'
 
     if videos.includes_values.include?(:tags)
-      condition << ' or tags.tag like :q'
+      finder = finder.joins(:tags)
+      conditions << ' or tags.tag like :q'
     end
 
-    videos.where(condition, q: "%#{q}%")
+    videos.where(id: finder.where(conditions, q: "%#{q}%").pluck('videos.id'))
   end
 
   def url
