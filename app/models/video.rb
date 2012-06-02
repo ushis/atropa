@@ -1,5 +1,4 @@
 require 'videourl'
-require 'will_paginate'
 
 class Video < ActiveRecord::Base
   include Rails.application.routes.url_helpers
@@ -24,7 +23,17 @@ class Video < ActiveRecord::Base
   end
 
   def self.search(q, page = 1, per_page = 6)
-    most_recent(page, per_page).where('videos.title like ?', "%#{q}%")
+    videos = most_recent(page, per_page)
+
+    return videos if q.blank?
+
+    condition = 'videos.title like :q'
+
+    if videos.includes_values.include?(:tags)
+      condition << ' or tags.tag like :q'
+    end
+
+    videos.where(condition, q: "%#{q}%")
   end
 
   def url
