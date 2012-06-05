@@ -87,7 +87,7 @@ a:hover {
   width: 147px;
   height: 41px;
   text-indent: -9999px;
-  background: transparent url('/assets/atropa.png') left top no-repeat;
+  background: transparent url(<%= asset_data_uri 'atropa.png' %>) left top no-repeat;
 }
 
 #tools {
@@ -166,7 +166,7 @@ a:hover {
 
 #tools input[type=text].empty {
   width: 2px;
-  background: transparent url('/assets/search.png') -14px center no-repeat;
+  background: transparent url(<%= asset_data_uri 'search.png' %>) -14px center no-repeat;
   cursor: pointer;
 }
 
