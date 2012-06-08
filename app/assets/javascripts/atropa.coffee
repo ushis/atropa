@@ -1,8 +1,6 @@
-###
-atropa.coffee
-
-requires  jQuery 1.7
-###
+# atropa.coffee
+#
+# requires  jQuery 1.7
 
 do ($ = jQuery) ->
   $.fn.magicSearch = (url, field) ->
@@ -27,13 +25,13 @@ do ($ = jQuery) ->
           src = $(@).attr('href') + '&autoplay=1'
 
           $(@).parent().html(
-            $('<iframe>').attr(
+            $('<iframe>').attr {
               src: src,
               width: el.width(),
               height: el.height(),
               frameborder: 0,
               allowfullscreen: true
-            )
+            }
           )
 
           false

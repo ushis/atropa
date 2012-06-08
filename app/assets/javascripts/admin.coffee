@@ -1,8 +1,7 @@
-###
-admin.coffe
+# admin.coffe
+#
+# requires  jQuery >= 1.7
 
-@requires  jQuery >= 1.7
-###
 do ($ = jQuery) ->
   $.fn.magicLogin = (options) ->
     settings = $.extend {
@@ -50,6 +49,6 @@ do ($ = jQuery) ->
           terms.pop()
           terms.push(ui.item.value)
           terms.push('')
-          @.value = terms.join(', ')
+          @value = terms.join(', ')
           false
       }
