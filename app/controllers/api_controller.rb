@@ -17,7 +17,7 @@ class ApiController < ActionController::Base
     signature = params[:signature].to_s
     path = request.fullpath.sub(/(?:\?|&)signature=#{signature}/, '')
 
-    unless current_user.try { |user| user.confirm_signature(path, signature) }
+    unless current_user.try { |user| user.verify_signature(path, signature) }
       respond_with('Invalid username or signature', 401)
     end
   end

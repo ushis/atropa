@@ -1,5 +1,6 @@
 require 'digest/sha1'
 require 'digest/md5'
+require 'openssl'
 require 'securerandom'
 
 class User < ActiveRecord::Base
@@ -30,8 +31,8 @@ class User < ActiveRecord::Base
     save
   end
 
-  def confirm_signature(data, signature)
-    Digest::SHA1.hexdigest(data + self.api_key) == signature
+  def verify_signature(data, signature)
+    OpenSSL::HMAC.hexdigest(OpenSSL::Digest::SHA1.new, self.api_key, data) == signature
   end
 
   def to_s
