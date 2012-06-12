@@ -1,27 +1,25 @@
-<article>
-  <div class="video">
-    <div class="preview">
-      <%= video_preview video, 640 %>
-    </div>
-    <div class="player">
-      <%= link_to '▶', video.source, class: 'play' %>
-    </div>
+<div class="video">
+  <div class="preview">
+    <%= video_preview video, 640 %>
   </div>
-  <footer>
-    <ul class="links">
+  <div class="player">
+    <%= link_to '▶', video.source, class: 'play' %>
+  </div>
+</div>
+<footer>
+  <ul class="links">
+    <li>
+      <%= link_to '↗', video.link %>
+    </li>
+    <li>
+      <%= link_to '#', video_path(id: video, slug: video.slug) %>
+    </li>
+  </ul>
+  <ul class="tags">
+    <% video.tags.each do |tag| %>
       <li>
-        <%= link_to '↗', video.link %>
+        <%= link_to tag.tag, tag_path(id: tag, slug: tag.slug) %>
       </li>
-      <li>
-        <%= link_to '#', video_path(id: video, slug: video.slug) %>
-      </li>
-    </ul>
-    <ul class="tags">
-      <% video.tags.each do |tag| %>
-        <li>
-          <%= link_to tag.tag, tag_path(id: tag, slug: tag.slug) %>
-        </li>
-      <% end %>
-    </ul>
-  </footer>
-</article>
+    <% end %>
+  </ul>
+</footer>

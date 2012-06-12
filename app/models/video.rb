@@ -38,6 +38,22 @@ class Video < ActiveRecord::Base
     videos.where(id: finder.where(conditions, q: "%#{q}%").pluck('videos.id'))
   end
 
+  def similar(limit = 4)
+    Video.where('videos.id in (
+                   select tv.video_id
+                   from tags_videos tv
+                   where tv.tag_id in (
+                     select _tv.tag_id
+                     from tags_videos _tv
+                     where _tv.video_id = :id
+                   )
+                   and tv.video_id != :id
+                   group by tv.video_id
+                   order by count(tv.tag_id) desc
+                   limit :limit
+                 )', id: id, limit: limit)
+  end
+
   def url
     video_url id: id, slug: slug
   end

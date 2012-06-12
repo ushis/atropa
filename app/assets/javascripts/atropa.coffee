@@ -35,3 +35,10 @@ do ($ = jQuery) ->
           )
 
           false
+
+  $.fn.atropaSimilar = () ->
+    @each ->
+      $(@).find('img').each ->
+        if (height = (Number) $(@).attr('height')) > 0
+          diff = ($(@).parent().height() - height) >> 1
+          $(@).css(marginTop: "#{diff}px")

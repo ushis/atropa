@@ -1,3 +1,16 @@
 <div class="articles">
-  <%= render partial: 'video', locals: {video: @video} %>
+  <article>
+    <%= render partial: 'video', locals: {video: @video} %>
+    <ul class="similar-videos">
+      <% @video.similar.each do |video| %>
+        <li>
+          <%= link_to video_preview(video, 145), video_path(id: video, slug: video.slug) %>
+        </li>
+      <% end %>
+    </ul>
+  </article>
 </div>
+
+<script>
+  $('ul.similar-videos').atropaSimilar();
+</script>
