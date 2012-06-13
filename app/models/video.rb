@@ -41,11 +41,16 @@ class Video < ActiveRecord::Base
   def self.connections
     {
       videos: connection.select_all('select videos.id, videos.title from videos'),
-      links:  connection.select_all('select tv.video_id x, _tv.video_id y
+      links:  connection.select_all('select distinct tv.video_id x, _tv.video_id y
                                      from tags_videos tv
                                      inner join tags_videos _tv
                                      on tv.tag_id = _tv.tag_id
-                                     where x < y')
+                                     where x < y
+                                     and tv.tag_id not in (
+                                       select __tv.tag_id from tags_videos __tv
+                                       group by __tv.tag_id
+                                       having count(__tv.tag_id) > 30
+                                     )')
     }
   end
 
