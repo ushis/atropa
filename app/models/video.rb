@@ -40,7 +40,7 @@ class Video < ActiveRecord::Base
 
   def self.connections
     {
-      videos: connection.select_all('select videos.id, videos.title from videos'),
+      videos: all,
       links:  connection.select_all('select distinct tv.video_id x, _tv.video_id y
                                      from tags_videos tv
                                      inner join tags_videos _tv

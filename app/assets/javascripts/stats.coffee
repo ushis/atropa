@@ -21,7 +21,7 @@ do ($ = jQuery) ->
     }, options
 
     @each ->
-      id = $(@).attr('id')
+      el = d3.select '#' + $(@).attr('id')
 
       force = d3.layout
                 .force()
@@ -31,8 +31,7 @@ do ($ = jQuery) ->
                 .linkDistance(settings.linkDistance)
                 .size([settings.width, settings.height])
 
-      svg = d3.select("\##{id}")
-              .append('svg')
+      svg = el.append('svg')
               .attr('width', settings.width)
               .attr('height', settings.height)
 
@@ -87,6 +86,9 @@ do ($ = jQuery) ->
           links.transition()
                .duration(settings.duration)
                .style('stroke', settings.stroke)
+
+        nodes.on 'dblclick', (d) ->
+          window.location = d.url
 
         force.on 'tick', () ->
           links.attr('x1', (d) -> d.source.x)
