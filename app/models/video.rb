@@ -38,6 +38,17 @@ class Video < ActiveRecord::Base
     videos.where(id: finder.where(conditions, q: "%#{q}%").pluck('videos.id'))
   end
 
+  def self.connections
+    {
+      videos: connection.select_all('select videos.id, videos.title from videos'),
+      links:  connection.select_all('select tv.video_id x, _tv.video_id y
+                                     from tags_videos tv
+                                     inner join tags_videos _tv
+                                     on tv.tag_id = _tv.tag_id
+                                     where x < y')
+    }
+  end
+
   def similar(limit = 4)
     Video.where('videos.id in (
                    select tv.video_id

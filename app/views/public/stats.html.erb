@@ -1,0 +1,12 @@
+<div id="stats-connections">
+</div>
+
+<%= javascript_include_tag 'd3.v2.min.js' %>
+<%= javascript_include_tag 'stats.js' %>
+
+<script>
+  $('#stats-connections').atropaConnections('<%= stats_path format: :json %>', {
+    width: 640,
+    height: 800
+  });
+</script>
