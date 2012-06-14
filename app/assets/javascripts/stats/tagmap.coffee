@@ -36,7 +36,7 @@ do ($ = jQuery) ->
           .enter()
           .append('div')
           .attr('class', (d) -> 'empty' unless d.children)
-          .text((d) -> d.tag unless d.children)
+          .html((d) -> "<p>#{d.tag}</p>" unless d.children)
           .attr('title', (d) -> "#{d.usage} videos" unless d.children)
           .on('click', (d) -> window.location = "/tag/#{d.id}/#{d.slug}")
           .transition()
