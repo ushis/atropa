@@ -328,6 +328,7 @@ ul.similar-videos li a:hover:before {
 
 #stats li {
   float: left;
+  margin-bottom: 40px;
 }
 
 #stats li:nth-child(2n) {
@@ -346,12 +347,20 @@ ul.similar-videos li a:hover:before {
   background-position: 0 -160px;
 }
 
+#stats a.stats.fountain {
+  background-position: 0 -320px;
+}
+
 #stats a.stats.fishnet:hover {
   background-position: -310px 0;
 }
 
 #stats a.stats.tagmap:hover {
   background-position: -310px -160px;
+}
+
+#stats a.stats.fountain:hover {
+  background-position: -310px -320px;
 }
 
 #stats-tagmap div {
@@ -373,6 +382,10 @@ ul.similar-videos li a:hover:before {
   -o-transition: background-color .4s;
   -ms-transition: background-color .4s;
   transition: background-color .4s;
+}
+
+#stats-fountain .fade {
+  display: none;
 }
 
 #stats-tagmap div.empty:hover {

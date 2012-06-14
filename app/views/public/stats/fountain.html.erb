@@ -1,0 +1,12 @@
+<div id="stats-fountain">
+</div>
+
+<%= javascript_include_tag 'd3.v2.min.js' %>
+<%= javascript_include_tag 'stats/fountain.js' %>
+
+<script>
+  $('#stats-fountain').atropaFountain('<%= stats_fountain_path format: :json %>', {
+    width: 640,
+    height: 640
+  });
+</script>

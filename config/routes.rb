@@ -11,9 +11,10 @@ Atropa::Application.routes.draw do
   post 'search'                  => 'public#redirect_search', as: :search
 
   scope module: :public do
-    get 'stats'         => 'stats#index'
-    get 'stats/fishnet' => 'stats#fishnet'
-    get 'stats/tagmap'  => 'stats#tagmap'
+    get 'stats'          => 'stats#index'
+    get 'stats/fishnet'  => 'stats#fishnet'
+    get 'stats/tagmap'   => 'stats#tagmap'
+    get 'stats/fountain' => 'stats#fountain'
   end
 
   # Admin routes
