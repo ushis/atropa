@@ -4,7 +4,7 @@
 # requires  D3     >= 2
 
 do ($ = jQuery) ->
-  $.fn.atropaConnections = (uri, options) ->
+  $.fn.atropaFishnet = (uri, options) ->
     settings = $.extend {
       width: 640,
       height: 400,
@@ -91,10 +91,12 @@ do ($ = jQuery) ->
           window.location = d.url
 
         force.on 'tick', () ->
+          offset = settings.r * 2
+
+          nodes.attr('cx', (d) -> d.x = Math.max(offset, Math.min(settings.width - offset, d.x)))
+               .attr('cy', (d) -> d.y = Math.max(offset, Math.min(settings.height - offset, d.y)))
+
           links.attr('x1', (d) -> d.source.x)
                .attr('y1', (d) -> d.source.y)
                .attr('x2', (d) -> d.target.x)
                .attr('y2', (d) -> d.target.y)
-
-          nodes.attr('cx', (d) -> d.x)
-               .attr('cy', (d) -> d.y)

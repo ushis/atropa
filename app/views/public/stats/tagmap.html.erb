@@ -1,0 +1,12 @@
+<div id="stats-tagmap">
+</div>
+
+<%= javascript_include_tag 'd3.v2.min.js' %>
+<%= javascript_include_tag 'stats/tagmap.js' %>
+
+<script>
+  $('#stats-tagmap').atropaTagmap('<%= stats_tagmap_path format: :json %>', {
+    width: 640,
+    height: 800
+  });
+</script>

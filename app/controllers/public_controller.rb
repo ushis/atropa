@@ -46,15 +46,6 @@ class PublicController < ActionController::Base
     end
   end
 
-  def stats
-    @title = 'stats'
-
-    respond_to do |format|
-      format.html
-      format.json { render json: Video.connections }
-    end
-  end
-
   def load_tags
     @tags = Tag.most_popular(32).order(:tag)
   end

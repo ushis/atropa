@@ -30,7 +30,14 @@ class Tag < ActiveRecord::Base
 
   def self.most_popular(limit = 20)
     where('tags.id in (select tv.tag_id from tags_videos tv group by
-           tv.tag_id order by count(tv.tag_id) DESC LIMIT ?)', limit)
+           tv.tag_id order by count(tv.tag_id) desc limit ?)', limit)
+  end
+
+  def self.all_with_usage
+    connection.select_all('select t.id, t.tag, t.slug, count(tv.tag_id) usage
+                           from tags t
+                           join tags_videos tv on tv.tag_id = t.id
+                           group by t.id')
   end
 
   def most_recent_videos(page = 1, per_page = 6)

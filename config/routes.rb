@@ -9,7 +9,12 @@ Atropa::Application.routes.draw do
   get  'feed'                    => 'public#feed',            as: :feed
   get  'search(/:q(/:page))'     => 'public#search',          as: :search
   post 'search'                  => 'public#redirect_search', as: :search
-  get  'stats'                   => 'public#stats',           as: :stats
+
+  scope module: :public do
+    get 'stats'         => 'stats#index'
+    get 'stats/fishnet' => 'stats#fishnet'
+    get 'stats/tagmap'  => 'stats#tagmap'
+  end
 
   # Admin routes
   get 'admin(/videos/:page)' => 'admin/videos#index', as: :admin

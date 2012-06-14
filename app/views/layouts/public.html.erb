@@ -37,6 +37,9 @@
             </div>
           </li>
           <li>
+            <%= link_to 'graph', stats_path %>
+          </li>
+          <li>
             <%= form_tag search_path, id: 'search' do %>
               <%= text_field_tag :q, @q, {class: @q ? nil : 'empty'} %>
             <% end %>

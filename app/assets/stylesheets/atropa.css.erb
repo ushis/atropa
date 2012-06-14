@@ -321,6 +321,62 @@ ul.similar-videos li a:hover:before {
   color: #ff7916;
 }
 
+/* Stats */
+#stats {
+  margin-top: 10px;
+}
+
+#stats li {
+  float: left;
+}
+
+#stats li:nth-child(2n) {
+  margin-left: 20px;
+}
+
+#stats a.stats {
+  display: block;
+  width: 310px;
+  height: 160px;
+  background: transparent url('/assets/stats.png') left top no-repeat;
+  text-indent: -9999px;
+}
+
+#stats a.stats.tagmap {
+  background-position: 0 -160px;
+}
+
+#stats a.stats.fishnet:hover {
+  background-position: -310px 0;
+}
+
+#stats a.stats.tagmap:hover {
+  background-position: -310px -160px;
+}
+
+#stats-tagmap div {
+  position: absolute;
+  color: #000;
+  font-size: 12px;
+  overflow: hidden;
+  padding: 4px;
+  box-sizing: border-box;
+}
+
+#stats-tagmap div.empty {
+  background-color: #222;
+  cursor: pointer;
+  -webkit-transition: background-color .4s;
+  -moz-transition: background-color .4s;
+  -o-transition: background-color .4s;
+  -ms-transition: background-color .4s;
+  transition: background-color .4s;
+}
+
+#stats-tagmap div.empty:hover {
+  background-color: #ff7916;
+}
+
 /* Pagination */
 ul.pagination {
   float: left;
