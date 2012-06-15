@@ -384,12 +384,40 @@ ul.similar-videos li a:hover:before {
   transition: background-color .4s;
 }
 
-#stats-fountain .fade {
+#stats-tagmap div.empty:hover {
+  background-color: #ff7916;
+}
+
+#stats-fountain svg {
+  fill: #111;
+}
+
+#stats-fountain path.chord {
+  fill: #2f2f2f;
+}
+
+#stats-fountain.active path.chord {
   display: none;
 }
 
-#stats-tagmap div.empty:hover {
-  background-color: #ff7916;
+#stats-fountain.active path.chord.highlight {
+  display: block;
+  fill: #ff7916;
+}
+
+#stats-fountain text {
+  font-size: 12px;
+  fill: #2f2f2f;
+  cursor: default;
+}
+
+#stats-fountain path.node {
+  fill: #222;
+}
+
+#stats-fountain .highlight path.node,
+#stats-fountain .highlight text {
+  fill: #ff7916;
 }
 
 /* Pagination */

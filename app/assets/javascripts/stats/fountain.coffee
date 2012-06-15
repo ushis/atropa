@@ -7,19 +7,14 @@ do ($ = jQuery) ->
   $.fn.atropaFountain = (uri, options) ->
     settings = $.extend {
       width: 640,
-      height: 400,
-      padding: .02,
-      color: '#2f2f2f',
-      color2: '#222',
-      highlight: '#ff7916',
-      background: '#111'
+      height: 640,
+      padding: .02
     }, options
 
-    settings.outerRadius = Math.min(settings.width, settings.height) / 2
+    settings.outerRadius = Math.min(settings.width, settings.height) / 2 - 70
     settings.innerRadius = settings.outerRadius - 24
 
-    nullMatrix = (len) ->
-      ((0 for i in [0...len]) for j in [0...len])
+    nullMatrix = (len) -> ((0 for i in [0...len]) for j in [0...len])
 
     @each ->
       el = $(@)
@@ -41,11 +36,7 @@ do ($ = jQuery) ->
               .attr('width', settings.width)
               .attr('height', settings.height)
               .append('g')
-              .attr('class', 'main')
               .attr('transform', "translate(#{settings.width / 2}, #{settings.height / 2})")
-              .style('fill', settings.background)
-
-      svg.append('circle').attr('r', settings.outerRadius)
 
       d3.json uri, (json) ->
         json.videos.indexById = (id) ->
@@ -69,34 +60,41 @@ do ($ = jQuery) ->
 
         group.append('title').text((d, i) -> json.videos[i].title)
 
-        groupPath = group.append('path')
-                         .attr('d', arc)
-                         .style('fill', settings.color2)
+        group.append('text')
+             .text((d, i) -> json.videos[i].title[0..8] if d.value > 0)
+             .attr 'transform', (d) ->
+               "rotate(#{(d.startAngle + d.endAngle) * 90 / Math.PI - 89})" +
+               "translate(#{settings.outerRadius + 4}, 0)"
+
+        group.append('path')
+             .attr('d', arc)
+             .attr('class', 'node')
 
         chord = svg.selectAll('path.chord')
                    .data(layout.chords)
                    .enter()
                    .append('path')
-                   .style('fill', settings.color)
                    .attr('d', path)
+                   .attr('class', 'chord')
 
         group.on 'mouseover', (d, i) ->
           targets = [i]
 
-          chord.style('fill', settings.highlight)
-               .classed('fade', (p) -> p.source.index != i && p.target.index != i)
-               .each (p) ->
-                 if p.source.index == i
-                   targets.push p.target.index
-                 else if p.target.index == i
-                   targets.push p.source.index
+          el.addClass('active')
 
-          groupPath.style 'fill', (_d, _i) ->
-            if $.inArray(_i, targets) > -1 then settings.highlight else settings.color2
+          chord.classed 'highlight', (p) ->
+            if p.source.index == i
+              targets.push p.target.index
+            else if p.target.index == i
+              targets.push p.source.index
+            else
+              return false
+
+          group.classed 'highlight', (_d, _i) -> $.inArray(_i, targets) > -1
 
         el.mouseleave ->
-          chord.style('fill', settings.color).classed 'fade', false
-          groupPath.style('fill', settings.color2).classed 'fade', false
+          $(@).removeClass('active')
+          chord.classed 'highlight', false
+          group.classed 'highlight', false
 
-        group.on 'dblclick', (d, i) ->
-          window.location = json.videos[i].url
+        group.on 'dblclick', (d, i) -> window.location = json.videos[i].url
