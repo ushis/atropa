@@ -28,8 +28,7 @@ do ($ = jQuery) ->
                  .sortSubgroups(d3.descending)
                  .sortChords(d3.ascending)
 
-      path = d3.svg.chord()
-               .radius(settings.innerRadius)
+      path = d3.svg.chord().radius(settings.innerRadius)
 
       svg = d3.select("\##{el.attr('id')}")
               .append('svg')
@@ -53,10 +52,11 @@ do ($ = jQuery) ->
 
         layout.matrix(matrix)
 
-        group = svg.selectAll('g.group')
+        group = svg.selectAll('g.node')
                    .data(layout.groups)
                    .enter()
                    .append('g')
+                   .attr('class', 'node')
 
         group.append('title').text((d, i) -> json.videos[i].title)
 
@@ -79,7 +79,6 @@ do ($ = jQuery) ->
 
         group.on 'mouseover', (d, i) ->
           targets = [i]
-
           el.addClass('active')
 
           chord.classed 'highlight', (p) ->
@@ -97,4 +96,4 @@ do ($ = jQuery) ->
           chord.classed 'highlight', false
           group.classed 'highlight', false
 
-        group.on 'dblclick', (d, i) -> window.location = json.videos[i].url
+        group.on 'click', (d, i) -> window.location = json.videos[i].url

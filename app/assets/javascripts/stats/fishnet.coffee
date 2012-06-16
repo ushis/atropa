@@ -13,11 +13,6 @@ do ($ = jQuery) ->
       friction: 0.4,
       gravity: .14
       charge: -500,
-      color: '#333'
-      colorHightlight: '#ff7916'
-      stroke: '#222'
-      strokeHighlight: '#333',
-      duration: 400
     }, options
 
     @each ->
@@ -53,42 +48,21 @@ do ($ = jQuery) ->
                    .data(json.links)
                    .enter()
                    .append('line')
-                   .style('stroke', settings.stroke)
 
         nodes = svg.selectAll('circle.node')
                    .data(json.videos)
                    .enter()
                    .append('circle')
                    .attr('r', settings.r)
-                   .style('fill', settings.color)
-                   .style('cursor', 'move')
                    .call(force.drag)
 
         nodes.append('title').text (d) -> d.title
 
         nodes.on 'mouseover', (d) ->
-          d3.select(@)
-            .transition()
-            .duration(settings.duration)
-            .style('fill', settings.colorHightlight)
+          links.classed('highlight', (_d) -> _d.source is d || _d.target is d)
 
-          links.filter((ld) -> ld.source is d || ld.target is d)
-               .transition()
-               .duration(settings.duration)
-               .style('stroke', settings.strokeHighlight)
-
-        nodes.on 'mouseout', () ->
-          d3.select(@)
-            .transition()
-            .duration(settings.duration)
-            .style('fill', settings.color)
-
-          links.transition()
-               .duration(settings.duration)
-               .style('stroke', settings.stroke)
-
-        nodes.on 'dblclick', (d) ->
-          window.location = d.url
+        nodes.on 'mouseout', (d) -> links.classed 'highlight', false
+        nodes.on 'dblclick', (d) -> window.location = d.url
 
         force.on 'tick', () ->
           offset = settings.r * 2

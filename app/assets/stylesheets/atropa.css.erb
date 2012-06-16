@@ -363,6 +363,33 @@ ul.similar-videos li a:hover:before {
   background-position: -310px -320px;
 }
 
+#stats-fishnet circle {
+  fill: #333;
+  cursor: move;
+  -webkit-transition: fill .4s;
+  -moz-transition: fill .4s;
+  -o-transition: fill .4s;
+  -ms-transition: fill .4s;
+  transition: fill .4s;
+}
+
+#stats-fishnet circle:hover {
+  fill: #ff7916;
+}
+
+#stats-fishnet line {
+  stroke: #222;
+  -webkit-transition: stroke .4s;
+  -moz-transition: stroke .4s;
+  -o-transition: stroke .4s;
+  -ms-transition: stroke .4s;
+  transition: stroke .4s;
+}
+
+#stats-fishnet line.highlight {
+  stroke: #333;
+}
+
 #stats-tagmap div {
   position: absolute;
   color: #000;
@@ -392,6 +419,10 @@ ul.similar-videos li a:hover:before {
   fill: #111;
 }
 
+#stats-fountain g.node {
+  cursor: pointer;
+}
+
 #stats-fountain path.chord {
   fill: #2f2f2f;
 }
@@ -408,7 +439,6 @@ ul.similar-videos li a:hover:before {
 #stats-fountain text {
   font-size: 11px;
   fill: #111;
-  cursor: default;
 }
 
 #stats-fountain path.node {
