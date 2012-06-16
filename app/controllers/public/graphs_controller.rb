@@ -1,8 +1,8 @@
-class Public::StatsController < PublicController
-  before_filter lambda { @title = "stats : #{params[:action]}" }
+class Public::GraphsController < PublicController
+  before_filter lambda { @title = "graph : #{params[:action]}" }
 
   def index
-    @title = 'stats'
+    @title = 'graphs'
   end
 
   def fishnet

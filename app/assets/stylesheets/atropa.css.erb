@@ -322,48 +322,48 @@ ul.similar-videos li a:hover:before {
 }
 
 /* Stats */
-#stats {
+#graphs {
   margin-top: 10px;
 }
 
-#stats li {
+#graphs li {
   float: left;
   margin-bottom: 40px;
 }
 
-#stats li:nth-child(2n) {
+#graphs li:nth-child(2n) {
   margin-left: 20px;
 }
 
-#stats a.stats {
+#graphs li a {
   display: block;
   width: 310px;
   height: 160px;
-  background: transparent url('/assets/stats.png') left top no-repeat;
+  background: transparent url('/assets/graphs.png') left top no-repeat;
   text-indent: -9999px;
 }
 
-#stats a.stats.tagmap {
+#graphs a.tagmap {
   background-position: 0 -160px;
 }
 
-#stats a.stats.fountain {
+#graphs a.fountain {
   background-position: 0 -320px;
 }
 
-#stats a.stats.fishnet:hover {
+#graphs a.fishnet:hover {
   background-position: -310px 0;
 }
 
-#stats a.stats.tagmap:hover {
+#graphs a.tagmap:hover {
   background-position: -310px -160px;
 }
 
-#stats a.stats.fountain:hover {
+#graphs a.fountain:hover {
   background-position: -310px -320px;
 }
 
-#stats-fishnet circle {
+#graph-fishnet circle {
   fill: #333;
   cursor: move;
   -webkit-transition: fill .4s;
@@ -373,11 +373,11 @@ ul.similar-videos li a:hover:before {
   transition: fill .4s;
 }
 
-#stats-fishnet circle:hover {
+#graph-fishnet circle:hover {
   fill: #ff7916;
 }
 
-#stats-fishnet line {
+#graph-fishnet line {
   stroke: #222;
   -webkit-transition: stroke .4s;
   -moz-transition: stroke .4s;
@@ -386,22 +386,22 @@ ul.similar-videos li a:hover:before {
   transition: stroke .4s;
 }
 
-#stats-fishnet line.highlight {
+#graph-fishnet line.highlight {
   stroke: #333;
 }
 
-#stats-tagmap div {
+#graph-tagmap div {
   position: absolute;
   color: #000;
   font-size: 12px;
   overflow: hidden;
 }
 
-#stats-tagmap div p {
+#graph-tagmap div p {
   margin: 4px;
 }
 
-#stats-tagmap div.empty {
+#graph-tagmap div.empty {
   background-color: #222;
   cursor: pointer;
   -webkit-transition: background-color .4s;
@@ -411,42 +411,42 @@ ul.similar-videos li a:hover:before {
   transition: background-color .4s;
 }
 
-#stats-tagmap div.empty:hover {
+#graph-tagmap div.empty:hover {
   background-color: #ff7916;
 }
 
-#stats-fountain svg {
+#graph-fountain svg {
   fill: #111;
 }
 
-#stats-fountain g.node {
+#graph-fountain g.node {
   cursor: pointer;
 }
 
-#stats-fountain path.chord {
+#graph-fountain path.chord {
   fill: #2f2f2f;
 }
 
-#stats-fountain.active path.chord {
+#graph-fountain.active path.chord {
   display: none;
 }
 
-#stats-fountain.active path.chord.highlight {
+#graph-fountain.active path.chord.highlight {
   display: block;
   fill: #ff7916;
 }
 
-#stats-fountain text {
+#graph-fountain text {
   font-size: 11px;
   fill: #111;
 }
 
-#stats-fountain path.node {
+#graph-fountain path.node {
   fill: #222;
 }
 
-#stats-fountain .highlight path.node,
-#stats-fountain .highlight text {
+#graph-fountain .highlight path.node,
+#graph-fountain .highlight text {
   fill: #ff7916;
 }
 

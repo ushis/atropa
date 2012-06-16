@@ -1,0 +1,12 @@
+<div id="graph-fishnet">
+</div>
+
+<%= javascript_include_tag 'd3.v2.min.js' %>
+<%= javascript_include_tag 'graphs/fishnet.js' %>
+
+<script>
+  $('#graph-fishnet').atropaFishnet('<%= fishnet_graphs_path format: :json %>', {
+    width: 640,
+    height: 800
+  });
+</script>
