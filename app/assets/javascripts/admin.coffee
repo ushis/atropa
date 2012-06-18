@@ -26,24 +26,22 @@ do ($ = jQuery) ->
       else
         username.focus()
 
-  $.fn.magicRemoveButton = () ->
+  $.fn.magicRemoveButton = ->
     @each ->
       do (el = $(@)) ->
-        el.append(
+        el.append ->
           $('<span>').addClass('rm').text('×').click ->
             el.fadeOut 400, ->
               $(@).remove()
-        )
 
   $.fn.magicComplete = (values) ->
     @each ->
       $(@).autocomplete {
-        minLength: 0,
-        appendTo: $(@).parent(),
+        minLength: 0
+        appendTo: $(@).parent()
         source: (req, res) ->
           res($.ui.autocomplete.filter(values, req.term.split(/,\s*/).pop()))
-        focus: () ->
-          false
+        focus: -> false
         select: (e, ui) ->
           terms = @value.split(/,\s*/)
           terms.pop()
@@ -52,3 +50,9 @@ do ($ = jQuery) ->
           @value = terms.join(', ')
           false
       }
+
+  $.fn.magicPreview = ->
+    @each ->
+      if (height = (Number) $(@).attr('height')) > 0
+        diff = ($(@).parent().height() - height) >> 1
+        $(@).css(marginTop: "#{diff}px")

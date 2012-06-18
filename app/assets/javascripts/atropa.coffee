@@ -3,7 +3,7 @@
 # requires  jQuery 1.7
 
 do ($ = jQuery) ->
-  $.fn.magicSearch = (url, field) ->
+  $.fn.atropaSearch = (url, field) ->
     @each ->
       el = $(@).find "input[name=#{field}]"
 
@@ -18,21 +18,20 @@ do ($ = jQuery) ->
         window.location.replace("#{url}/#{val}") if val.length > 0
         false
 
-  $.fn.atropaVideo = () ->
+  $.fn.atropaVideo = ->
     @each ->
       do (el = $(@)) ->
         el.find('a.play').css(lineHeight: "#{el.height()}px").click ->
           src = $(@).attr('href') + '&autoplay=1'
 
-          $(@).parent().html(
+          $(@).parent().html ->
             $('<iframe>').attr {
-              src: src,
-              width: el.width(),
-              height: el.height(),
-              frameborder: 0,
+              src: src
+              width: el.width()
+              height: el.height()
+              frameborder: 0
               allowfullscreen: true
             }
-          )
 
           false
 
