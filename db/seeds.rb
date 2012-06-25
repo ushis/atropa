@@ -2,4 +2,6 @@
 # The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
 
 # Create the initial user
-User.new(username: 'ushi', password: 'ushi', email: 'ushi@example.com').save
+ushi = User.new(username: 'ushi', password: 'ushi', email: 'ushi@example.com')
+ushi.refresh_api_key
+ushi.save

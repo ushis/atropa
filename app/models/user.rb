@@ -21,13 +21,21 @@ class User < ActiveRecord::Base
     self.gravatar_id = Digest::MD5.hexdigest email.strip.downcase
   end
 
-  def refresh_login_hash!
+  def refresh_login_hash
     self.login_hash = unique_hash
+  end
+
+  def refresh_login_hash!
+    refresh_login_hash
     save
   end
 
-  def refresh_api_key!
+  def refresh_api_key
     self.api_key = unique_hash
+  end
+
+  def refresh_api_key!
+    refresh_api_key
     save
   end
 
