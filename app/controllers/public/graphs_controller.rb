@@ -7,21 +7,21 @@ class Public::GraphsController < PublicController
 
   def fishnet
     respond_to do |format|
-      format.html
+      format.html { render :graph }
       format.json { render json: Video.connections }
     end
   end
 
   def tagmap
     respond_to do |format|
-      format.html
+      format.html { render :graph }
       format.json { render json: Tag.all_with_usage }
     end
   end
 
   def fountain
     respond_to do |format|
-      format.html
+      format.html { render :graph }
       format.json { render json: Video.connections }
     end
   end

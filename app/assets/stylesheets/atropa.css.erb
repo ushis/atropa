@@ -311,7 +311,7 @@ ul.similar-videos li a:hover:before {
   background-position: -310px -320px;
 }
 
-#graph-fishnet circle {
+#graph.fishnet circle {
   fill: #333;
   cursor: move;
   -webkit-transition: fill .4s;
@@ -321,11 +321,11 @@ ul.similar-videos li a:hover:before {
   transition: fill .4s;
 }
 
-#graph-fishnet circle:hover {
+#graph.fishnet circle:hover {
   fill: #ff7916;
 }
 
-#graph-fishnet line {
+#graph.fishnet line {
   stroke: #222;
   -webkit-transition: stroke .4s;
   -moz-transition: stroke .4s;
@@ -334,22 +334,22 @@ ul.similar-videos li a:hover:before {
   transition: stroke .4s;
 }
 
-#graph-fishnet line.highlight {
+#graph.fishnet line.highlight {
   stroke: #333;
 }
 
-#graph-tagmap div {
+#graph.tagmap div {
   position: absolute;
   color: #000;
   font-size: 12px;
   overflow: hidden;
 }
 
-#graph-tagmap div p {
+#graph.tagmap div p {
   margin: 4px;
 }
 
-#graph-tagmap div.empty {
+#graph.tagmap div.empty {
   background-color: #222;
   cursor: pointer;
   -webkit-transition: background-color .4s;
@@ -359,42 +359,42 @@ ul.similar-videos li a:hover:before {
   transition: background-color .4s;
 }
 
-#graph-tagmap div.empty:hover {
+#graph.tagmap div.empty:hover {
   background-color: #ff7916;
 }
 
-#graph-fountain svg {
+#graph.fountain svg {
   fill: #111;
 }
 
-#graph-fountain g.node {
+#graph.fountain g.node {
   cursor: pointer;
 }
 
-#graph-fountain path.chord {
+#graph.fountain path.chord {
   fill: #2f2f2f;
 }
 
-#graph-fountain.active path.chord {
+#graph.fountain.active path.chord {
   display: none;
 }
 
-#graph-fountain.active path.chord.highlight {
+#graph.fountain.active path.chord.highlight {
   display: block;
   fill: #ff7916;
 }
 
-#graph-fountain text {
+#graph.fountain text {
   font-size: 11px;
   fill: #111;
 }
 
-#graph-fountain path.node {
+#graph.fountain path.node {
   fill: #222;
 }
 
-#graph-fountain .highlight path.node,
-#graph-fountain .highlight text {
+#graph.fountain .highlight path.node,
+#graph.fountain .highlight text {
   fill: #ff7916;
 }
 

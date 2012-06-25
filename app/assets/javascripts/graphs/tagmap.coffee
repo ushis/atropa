@@ -7,7 +7,7 @@ do ($ = jQuery) ->
   $.fn.atropaTagmap = (uri, options) ->
     settings = $.extend {
       width: 640,
-      height: 400,
+      height: 800,
       duration: 400
     }, options
 

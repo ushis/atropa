@@ -7,7 +7,7 @@ do ($ = jQuery) ->
   $.fn.atropaFishnet = (uri, options) ->
     settings = $.extend {
       width: 640,
-      height: 400,
+      height: 800,
       r: 10,
       linkDistance: 120,
       friction: 0.4,
