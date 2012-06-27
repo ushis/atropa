@@ -3,13 +3,11 @@ require 'set'
 class Tag < ActiveRecord::Base
   include Rails.application.routes.url_helpers
 
-  attr_accessible :tag, :slug
+  attr_accessible :tag
 
   validates :tag, presence: true, uniqueness: true
 
   has_and_belongs_to_many :videos
-
-  before_save lambda { update_slug if tag_changed? }
 
   def self.from_s(str, delimiter = /,\s*/)
     tags = Set.new
@@ -34,15 +32,18 @@ class Tag < ActiveRecord::Base
   end
 
   def self.all_with_usage
-    connection.select_all('select t.id, t.tag, t.slug, count(tv.tag_id) usage
-                           from tags t
-                           join tags_videos tv on tv.tag_id = t.id
-                           group by t.id')
+    select('tags.id, tags.tag, count(tv.tag_id) vcount')
+    .joins('join tags_videos tv on tv.tag_id = tags.id')
+    .group('tags.id')
   end
 
   def most_recent_videos(page = 1, per_page = 6)
     Video.most_recent(page, per_page).where('videos.id in (select tv.video_id from
                                              tags_videos tv where tv.tag_id = ?)', id)
+  end
+
+  def slug
+    tag.parameterize
   end
 
   def url
@@ -54,12 +55,8 @@ class Tag < ActiveRecord::Base
   end
 
   def as_json(options = {})
-    json = super(only: [:id, :tag], methods: [:url])
+    json = super(only: [:id, :tag, :vcount], methods: [:url])
     json[:videos] = videos if association(:videos).loaded?
     json
-  end
-
-  def update_slug
-    self.slug = tag.parameterize
   end
 end

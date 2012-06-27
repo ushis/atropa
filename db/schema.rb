@@ -11,11 +11,10 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 4) do
+ActiveRecord::Schema.define(:version => 5) do
 
   create_table "tags", :force => true do |t|
-    t.string "tag",  :null => false
-    t.string "slug", :null => false
+    t.string "tag", :null => false
   end
 
   add_index "tags", ["tag"], :name => "index_tags_on_tag", :unique => true
@@ -43,7 +42,6 @@ ActiveRecord::Schema.define(:version => 4) do
     t.integer  "user_id",    :null => false
     t.string   "vid",        :null => false
     t.string   "title",      :null => false
-    t.string   "slug",       :null => false
     t.integer  "width",      :null => false
     t.integer  "height",     :null => false
     t.string   "preview",    :null => false

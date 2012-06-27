@@ -3,7 +3,7 @@ require 'videourl'
 class Video < ActiveRecord::Base
   include Rails.application.routes.url_helpers
 
-  attr_accessible :vid, :title, :slug, :width, :height, :preview, :provider
+  attr_accessible :vid, :title, :width, :height, :preview, :provider
 
   validates :title, presence: true
   validates :vid,   presence: true
@@ -11,8 +11,6 @@ class Video < ActiveRecord::Base
 
   belongs_to :user
   has_and_belongs_to_many :tags
-
-  before_save lambda { update_slug if title_changed? }
 
   def self.new_from_url(url)
     new VideoUrl.video_info(url)
@@ -39,35 +37,44 @@ class Video < ActiveRecord::Base
   end
 
   def self.connections
-    {
-      videos: all,
-      links:  connection.select_all('select distinct tv.video_id x, _tv.video_id y
-                                     from tags_videos tv
-                                     inner join tags_videos _tv
-                                     on tv.tag_id = _tv.tag_id
-                                     where x < y
-                                     and tv.tag_id not in (
-                                       select __tv.tag_id from tags_videos __tv
-                                       group by __tv.tag_id
-                                       having count(__tv.tag_id) > 30
-                                     )')
-    }
+    links = connection.select_all <<-SQL
+      select distinct tv.video_id x, _tv.video_id y
+      from tags_videos tv
+      inner join tags_videos _tv
+      on tv.tag_id = _tv.tag_id
+      where x < y
+      and tv.tag_id not in (
+        select __tv.tag_id from tags_videos __tv
+        group by __tv.tag_id
+        having count(__tv.tag_id) > 30
+      )
+    SQL
+
+    { videos: all, links: links }
   end
 
   def similar(limit = 4)
-    Video.where('videos.id in (
-                   select tv.video_id
-                   from tags_videos tv
-                   where tv.tag_id in (
-                     select _tv.tag_id
-                     from tags_videos _tv
-                     where _tv.video_id = :id
-                   )
-                   and tv.video_id != :id
-                   group by tv.video_id
-                   order by count(tv.tag_id) desc
-                   limit :limit
-                 )', id: id, limit: limit)
+    sql = <<-SQL
+      videos.id in (
+        select tv.video_id
+        from tags_videos tv
+        where tv.tag_id in (
+          select _tv.tag_id
+          from tags_videos _tv
+          where _tv.video_id = :id
+        )
+        and tv.video_id != :id
+        group by tv.video_id
+        order by count(tv.tag_id) desc
+        limit :limit
+      )
+    SQL
+
+    Video.where sql, id: id, limit: limit
+  end
+
+  def slug
+    title.parameterize
   end
 
   def url
@@ -87,9 +94,5 @@ class Video < ActiveRecord::Base
     json[:user] = user if association(:user).loaded?
     json[:tags] = tags if association(:tags).loaded?
     json
-  end
-
-  def update_slug
-    self.slug = title.parameterize
   end
 end

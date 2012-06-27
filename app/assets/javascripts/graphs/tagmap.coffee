@@ -25,7 +25,7 @@ do ($ = jQuery) ->
 
       treemap = d3.layout.treemap()
                   .size([settings.width, settings.height])
-                  .value((d) -> d.usage)
+                  .value((d) -> d.vcount)
                   .sort((x, y) -> x.tag < y.tag)
 
       d3.json uri, (json) ->
@@ -37,7 +37,7 @@ do ($ = jQuery) ->
           .attr('class', (d) -> 'empty' unless d.children)
           .attr('title', (d) -> "#{d.usage} videos" unless d.children)
           .html((d) -> "<p>#{d.tag}</p>" unless d.children)
-          .on('click', (d) -> window.location = "/tag/#{d.id}/#{d.slug}")
+          .on('click', (d) -> window.location = d.url)
           .transition()
           .duration(settings.duration)
           .call(cell)
