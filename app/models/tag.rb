@@ -21,8 +21,7 @@ class Tag < ActiveRecord::Base
   end
 
   def self.multi_find_or_initialize_by_tag(tags)
-    ret = where(tag: tags).all
-    ret.each { |tag| tags.delete tag.tag }
+    ret = where(tag: tags).each { |tag| tags.delete tag.tag }
     ret + tags.collect { |tag| self.new(tag: tag) }
   end
 
