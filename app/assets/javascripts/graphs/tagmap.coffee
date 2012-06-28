@@ -25,7 +25,7 @@ do ($ = jQuery) ->
 
       treemap = d3.layout.treemap()
                   .size([settings.width, settings.height])
-                  .value((d) -> d.vcount)
+                  .value((d) -> d.popularity)
                   .sort((x, y) -> x.tag < y.tag)
 
       d3.json uri, (json) ->
@@ -35,7 +35,7 @@ do ($ = jQuery) ->
           .enter()
           .append('div')
           .attr('class', (d) -> 'empty' unless d.children)
-          .attr('title', (d) -> "#{d.usage} videos" unless d.children)
+          .attr('title', (d) -> "#{d.popularity} videos" unless d.children)
           .html((d) -> "<p>#{d.tag}</p>" unless d.children)
           .on('click', (d) -> window.location = d.url)
           .transition()

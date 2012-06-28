@@ -15,7 +15,7 @@ class Public::GraphsController < PublicController
   def tagmap
     respond_to do |format|
       format.html { render :graph }
-      format.json { render json: Tag.all_with_usage }
+      format.json { render json: Tag.with_popularity }
     end
   end
 

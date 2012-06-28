@@ -30,8 +30,8 @@ class Tag < ActiveRecord::Base
            tv.tag_id order by count(tv.tag_id) desc limit ?)', limit)
   end
 
-  def self.all_with_usage
-    select('tags.id, tags.tag, count(tv.tag_id) vcount')
+  def self.with_popularity
+    select('tags.id, tags.tag, count(tv.tag_id) popularity')
     .joins('join tags_videos tv on tv.tag_id = tags.id')
     .group('tags.id')
   end
@@ -54,7 +54,7 @@ class Tag < ActiveRecord::Base
   end
 
   def as_json(options = {})
-    json = super(only: [:id, :tag, :vcount], methods: [:url])
+    json = super(only: [:id, :tag, :popularity], methods: [:url])
     json[:videos] = videos if association(:videos).loaded?
     json
   end
