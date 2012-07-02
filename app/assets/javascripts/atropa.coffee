@@ -15,7 +15,7 @@ do ($ = jQuery) ->
 
       $(@).submit ->
         val = el.val().trim()
-        window.location.replace("#{url}/#{val}") if val.length > 0
+        window.location.replace("#{url}/#{escape(val)}") if val.length > 0
         false
 
   $.fn.atropaVideo = ->
