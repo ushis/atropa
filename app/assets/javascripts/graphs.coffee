@@ -4,7 +4,7 @@
 #
 # requires       jQuery >= 1.7
 #
-# =require       d3.v2.min
+# =require       d3
 # =require_tree  ./graphs
 
 String::capitalize = ->

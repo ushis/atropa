@@ -6,11 +6,11 @@ gem 'sqlite3'
 group :assets do
   gem 'sass-rails',   '~> 3.2.5'
   gem 'coffee-rails', '~> 3.2.2'
+  gem 'd3-rails', '~> 0.0.5'
   gem 'uglifier', '>= 1.0.3'
   gem 'therubyracer'
 end
 
-gem 'jquery-rails'
 gem 'bcrypt-ruby', '~> 3.0.0'
 gem 'will_paginate', '~> 3.0'
 
