@@ -102,12 +102,10 @@ module VideoUrl::Youtube
 
   def self.info(url)
     data = VideoUrl.request(url, PATTERN, API).fetch('entry')
+    embed = data.fetch('yt$accessControl').find { |i| i['action'] == 'embed' }
 
-    data.fetch('yt$accessControl').each do |access|
-      if access['action'] == 'embed'
-        raise EmbedNotAllowdError if access['permission'] != 'allowed'
-        break
-      end
+    if embed['permission'] != 'allowed'
+      raise EmbedNotAllowedError
     end
 
     media = data.fetch('media$group')
