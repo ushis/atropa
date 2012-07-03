@@ -1,4 +1,5 @@
 require 'open-uri'
+require 'json'
 
 module VideoUrl
   class Error < StandardError
@@ -54,7 +55,7 @@ module VideoUrl
     end
 
     begin
-      ActiveSupport::JSON.decode open(api % {id: matches[1]}).read()
+      JSON.parse open(api % {id: matches[1]}, read_timeout: 10).read
     rescue
       raise RequestError, 'Could not retrieve video info'
     end
@@ -109,12 +110,15 @@ module VideoUrl::Youtube
       end
     end
 
+    media = data.fetch('media$group')
+    thumb = media.fetch('media$thumbnail').fetch(2)
+
     {
-      vid:      data.fetch('media$group').fetch('yt$videoid').fetch('$t'),
+      vid:      media.fetch('yt$videoid').fetch('$t'),
       title:    data.fetch('title').fetch('$t'),
-      width:    data.fetch('media$group').fetch('media$thumbnail').fetch(2).fetch('width'),
-      height:   data.fetch('media$group').fetch('media$thumbnail').fetch(2).fetch('height'),
-      preview:  data.fetch('media$group').fetch('media$thumbnail').fetch(2).fetch('url'),
+      width:    thumb.fetch('width'),
+      height:   thumb.fetch('height'),
+      preview:  thumb.fetch('url'),
       provider: 'youtube'
     }
   rescue KeyError
