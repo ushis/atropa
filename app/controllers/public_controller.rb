@@ -42,7 +42,7 @@ class PublicController < ActionController::Base
 
     respond_to do |format|
       format.atom { render layout: false }
-      format.json { render :json => @videos }
+      format.json { render json: @videos }
     end
   end
 
