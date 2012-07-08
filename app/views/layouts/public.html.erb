@@ -18,24 +18,26 @@
           <li>
             <%= link_to 'heim', root_path %>
           </li>
-          <li>
-            <div class="sub-link">
-              tags
-            </div>
-            <div class="sub">
-              <div>
-                <% @tags.each_slice(@tags.length.fdiv(4).ceil) do |tags| %>
-                  <ul class="tags">
-                    <% tags.each do |tag| %>
-                      <li<%= ' class="cur"'.html_safe if tag == @tag %>>
-                        <%= link_to tag.tag, tag_path(id: tag, slug: tag.slug) %>
-                      </li>
-                    <% end %>
-                  </ul>
-                <% end %>
+          <% if @tags.length > 2 %>
+            <li>
+              <div class="sub-link">
+                tags
               </div>
-            </div>
-          </li>
+              <div class="sub">
+                <div>
+                  <% @tags.each_slice(@tags.length.fdiv(4).ceil) do |tags| %>
+                    <ul class="tags">
+                      <% tags.each do |tag| %>
+                        <li<%= ' class="cur"'.html_safe if tag == @tag %>>
+                          <%= link_to tag.tag, tag_path(id: tag, slug: tag.slug) %>
+                        </li>
+                      <% end %>
+                    </ul>
+                  <% end %>
+                </div>
+              </div>
+            </li>
+          <% end %>
           <li>
             <%= link_to 'graph', graphs_path %>
           </li>
