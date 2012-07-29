@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 5) do
+ActiveRecord::Schema.define(:version => 6) do
 
   create_table "tags", :force => true do |t|
     t.string "tag", :null => false
@@ -25,17 +25,20 @@ ActiveRecord::Schema.define(:version => 5) do
   end
 
   create_table "users", :force => true do |t|
-    t.string   "username",        :null => false
-    t.string   "password_digest", :null => false
-    t.string   "email",           :null => false
+    t.string   "username",              :null => false
+    t.string   "password_digest",       :null => false
+    t.string   "email",                 :null => false
     t.string   "login_hash"
-    t.datetime "created_at",      :null => false
+    t.datetime "created_at",            :null => false
     t.string   "api_key"
     t.string   "gravatar_id"
+    t.string   "password_reset_hash"
+    t.datetime "password_reset_set_at"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
   add_index "users", ["login_hash"], :name => "index_users_on_login_hash", :unique => true
+  add_index "users", ["password_reset_hash"], :name => "index_users_on_password_reset_hash", :unique => true
   add_index "users", ["username"], :name => "index_users_on_username", :unique => true
 
   create_table "videos", :force => true do |t|

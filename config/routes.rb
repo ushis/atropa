@@ -32,6 +32,11 @@ Atropa::Application.routes.draw do
     get    'login' => 'login#form'
     post   'login' => 'login#login'
     delete 'login' => 'login#logout'
+
+    get 'forgot/password'            => 'login#forgot_password'
+    put 'forgot/password'            => 'login#request_password_reset'
+    get 'reset/password/:reset_hash' => 'login#reset_password', as: 'reset_password'
+    put 'reset/password/:reset_hash' => 'login#update_password'
   end
 
   # Api routes

@@ -37,4 +37,15 @@ Atropa::Application.configure do
 
   # Set the default host to localhost in development mode
   Rails.application.routes.default_url_options[:host] = '0.0.0.0'
+
+  # Mail confguration
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    address:             'pegasus.uberspace.de',
+    port:                587,
+    user_name:           'atropa@wurstcase.net',
+    password:            'XXXXXXXXX',
+    authentication:      'plain',
+    enable_starttls_auto: true
+  }
 end

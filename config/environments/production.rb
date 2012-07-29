@@ -68,4 +68,15 @@ Atropa::Application.configure do
   # Use SSL and wurstcase in production
   Rails.application.routes.default_url_options[:protocol] = 'https'
   Rails.application.routes.default_url_options[:host] = 'atropa.wurstcase.net'
+
+  # Mail confguration
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    address:              'localhost',
+    port:                 587,
+    user_name:            'atropa@wurstcase.net',
+    password:             'XXXXXXXXX',
+    authentication:       'plain',
+    enable_starttls_auto: true
+  }
 end
