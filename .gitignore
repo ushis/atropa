@@ -8,10 +8,12 @@
 /.bundle
 
 # Ignore the default SQLite database.
+/db/backup
 /db/*.sqlite3
 
 # Ignore all logfiles and tempfiles.
 /log/*.log
+/log/*.log.xz
 /tmp
 
 # Ignore precompiled assets

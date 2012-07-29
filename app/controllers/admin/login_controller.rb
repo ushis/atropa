@@ -77,6 +77,11 @@ class Admin::LoginController < AdminController
       redirect_to admin_forgot_password_url and return
     end
 
+    unless params[:password] && params[:password_confirmation]
+      flash.now[:alert] = 'Please enter a password and repeat it.'
+      render :reset_password and return
+    end
+
     @user.password = params[:password]
     @user.password_confirmation = params[:password_confirmation]
     @user.password_reset_hash = nil
