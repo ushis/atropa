@@ -69,7 +69,7 @@ Atropa::Application.configure do
   Rails.application.routes.default_url_options[:protocol] = 'https'
   Rails.application.routes.default_url_options[:host] = 'atropa.wurstcase.net'
 
-  # Mail confguration
+  # Mail configuration
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
     address:              'localhost',

@@ -20,7 +20,7 @@ class User < ActiveRecord::Base
 
   def self.authenticate_by_reset_hash(hash)
     sql = 'password_reset_hash = ? and password_reset_set_at > ?'
-    where(sql, hash, 20.minutes.ago).first
+    where(sql, hash, 10.minutes.ago).first
   end
 
   def update_gravatar_id
