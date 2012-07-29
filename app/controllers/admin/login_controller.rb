@@ -47,7 +47,7 @@ class Admin::LoginController < AdminController
   end
 
   def forgot_password
-    @title = 'Forgot password'
+    @title = 'Forgot my password'
   end
 
   def request_password_reset
@@ -87,7 +87,7 @@ class Admin::LoginController < AdminController
     @user.password_reset_hash = nil
 
     if @user.save
-      flash[:notice] = 'Saved new password'
+      flash[:notice] = 'Saved new password.'
       redirect_to admin_login_url
     else
       @user.password_reset_hash = @user.password_reset_hash_was

@@ -6,7 +6,7 @@
     <%= password_field_tag :password, nil, placeholder: 'password', required: true %>
   </p>
   <p>
-    <%= link_to 'Damn!', admin_forgot_password_path %>
+    <%= link_to 'Forgot your password?', admin_forgot_password_path %>
     <%= submit_tag 'Log In' %>
     <%= submit_tag 'Remember me', name: :remember_me, class: 'second-choice' %>
   </p>

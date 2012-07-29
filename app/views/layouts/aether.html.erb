@@ -12,7 +12,12 @@
   <body>
     <div id="aether">
       <%= flash_all %>
-      <%= yield %>
+      <div id="content">
+        <h1>
+          <%= @title %>
+        </h1>
+        <%= yield %>
+      </div>
     </div>
   </body>
 </html>
