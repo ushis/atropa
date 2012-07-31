@@ -70,7 +70,7 @@ class Video < ActiveRecord::Base
       )
     SQL
 
-    Video.where sql, id: id, limit: limit
+    Video.where(sql, id: id, limit: limit).order('created_at desc')
   end
 
   def slug
