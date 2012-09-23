@@ -1,4 +1,5 @@
 require 'open-uri'
+require 'uri'
 require 'json'
 
 module VideoUrl
@@ -110,16 +111,18 @@ module VideoUrl::Youtube
 
     media = data.fetch('media$group')
     thumb = media.fetch('media$thumbnail').fetch(2)
+    preview = URI.parse(thumb.fetch('url'))
+    preview.scheme = 'https' if preview.scheme != 'https'
 
     {
       vid:      media.fetch('yt$videoid').fetch('$t'),
       title:    data.fetch('title').fetch('$t'),
       width:    thumb.fetch('width'),
       height:   thumb.fetch('height'),
-      preview:  thumb.fetch('url'),
+      preview:  preview.to_s,
       provider: 'youtube'
     }
-  rescue KeyError
+  rescue KeyError, URI::Error
     raise InvalidResponseError, 'Youtube responded with invalid data'
   end
 end
